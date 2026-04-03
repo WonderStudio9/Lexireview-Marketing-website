@@ -137,7 +137,7 @@ export default function ResourcesPage() {
                     {r.desc}
                   </p>
                   <a
-                    href="https://app.lexireview.in"
+                    href="https://app.lexireview.in/signup"
                     className="inline-flex items-center gap-2 text-sm font-bold text-navy-700 hover:text-navy-900 transition-colors"
                   >
                     <Download size={14} /> Download Free
@@ -171,7 +171,7 @@ export default function ResourcesPage() {
               <motion.a
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                href="https://app.lexireview.in"
+                href="https://app.lexireview.in/signup"
                 className="group bg-white text-navy-900 text-lg font-bold py-4 px-10 rounded-2xl shadow-lg hover:shadow-xl transition-all inline-flex items-center"
               >
                 Start Free Trial

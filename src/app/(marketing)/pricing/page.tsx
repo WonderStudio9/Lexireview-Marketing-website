@@ -266,7 +266,7 @@ export default function PricingPage() {
                         href={
                           p.price === "Custom" || p.name === "Business"
                             ? "mailto:sales@lexireview.in"
-                            : "https://app.lexireview.in"
+                            : "https://app.lexireview.in/signup"
                         }
                         className={`w-full py-2.5 rounded-xl font-bold text-sm transition-all text-center block ${
                           p.recommended
@@ -312,7 +312,7 @@ export default function PricingPage() {
                         </span>
                       </div>
                       <a
-                        href="https://app.lexireview.in"
+                        href="https://app.lexireview.in/signup"
                         className="block w-full py-2 rounded-lg font-bold text-sm border-2 border-border hover:border-navy-800 hover:bg-navy-50 transition-colors text-center"
                       >
                         Buy Now

@@ -284,7 +284,7 @@ function HeroSection() {
             <motion.a
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              href="https://app.lexireview.in"
+              href="https://app.lexireview.in/signup"
               className="group relative bg-navy-900 text-white text-lg font-bold py-4 px-8 sm:px-10 rounded-2xl glow-navy overflow-hidden w-full sm:w-auto text-center"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
@@ -1246,7 +1246,7 @@ function ProductDemo() {
               <motion.a
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                href="https://app.lexireview.in"
+                href="https://app.lexireview.in/signup"
                 className="block w-full py-2.5 bg-gold-500 hover:bg-gold-400 text-navy-900 rounded-xl font-bold text-sm transition-colors text-center"
               >
                 Try It Yourself <ArrowUpRight size={14} className="inline ml-1" />
@@ -1390,7 +1390,7 @@ function HowItWorks() {
           <motion.a
             whileHover={{ scale: 1.03, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            href="https://app.lexireview.in"
+            href="https://app.lexireview.in/signup"
             className="group inline-flex items-center bg-navy-900 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow"
           >
             Try It Now — Free
@@ -1460,7 +1460,7 @@ function FinalCTA() {
               <motion.a
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                href="https://app.lexireview.in"
+                href="https://app.lexireview.in/signup"
                 className="group bg-white text-navy-900 text-lg font-bold py-4 px-10 rounded-2xl shadow-lg hover:shadow-xl transition-all inline-flex items-center"
               >
                 Start Your Free Trial

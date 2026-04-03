@@ -83,7 +83,7 @@ export default function ContactPage() {
                       meantime, feel free to explore our platform.
                     </p>
                     <a
-                      href="https://app.lexireview.in"
+                      href="https://app.lexireview.in/signup"
                       className="inline-flex items-center gap-2 mt-6 bg-navy-900 text-white px-6 py-3 rounded-xl font-bold text-sm"
                     >
                       Try LexiReview Free <ArrowRight size={14} />
@@ -239,7 +239,7 @@ export default function ContactPage() {
                   Our team will walk you through every feature.
                 </p>
                 <a
-                  href="https://app.lexireview.in"
+                  href="https://app.lexireview.in/signup"
                   className="inline-flex items-center gap-2 bg-gold-500 text-navy-900 px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-gold-400 transition-colors"
                 >
                   Schedule Demo <ArrowRight size={14} />

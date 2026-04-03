@@ -62,14 +62,14 @@ export function Header() {
           {/* Desktop CTA */}
           <div className="flex items-center gap-3">
             <a
-              href="https://app.lexireview.in"
+              href="https://app.lexireview.in/login"
               className="hidden sm:block text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
             >
               Log in
             </a>
             <motion.div whileHover={{ scale: 1.03, y: -1 }} whileTap={{ scale: 0.97 }}>
               <a
-                href="https://app.lexireview.in"
+                href="https://app.lexireview.in/signup"
                 className="group relative bg-navy-900 hover:bg-navy-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-colors overflow-hidden inline-flex items-center gap-2"
               >
                 <span className="relative z-10 flex items-center gap-2">
@@ -137,13 +137,13 @@ export function Header() {
                 className="flex flex-col items-center gap-4 mt-6"
               >
                 <a
-                  href="https://app.lexireview.in"
+                  href="https://app.lexireview.in/login"
                   className="text-lg font-semibold text-muted-foreground"
                 >
                   Log in
                 </a>
                 <a
-                  href="https://app.lexireview.in"
+                  href="https://app.lexireview.in/signup"
                   className="bg-navy-900 text-white px-8 py-3.5 rounded-xl font-bold text-lg"
                 >
                   Start Free Analysis
