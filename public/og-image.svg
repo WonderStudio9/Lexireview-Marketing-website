@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+
+    <!-- Shield gradient -->
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <!-- Logo glow -->
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#2563eb" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Subtle top highlight -->
+    <linearGradient id="topHighlight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Bottom strip gradient -->
+    <linearGradient id="stripGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0"/>
+      <stop offset="15%" stop-color="#1e293b"/>
+      <stop offset="85%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#1e293b" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Separator dot gradient -->
+    <radialGradient id="dotGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0.3"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Subtle grid pattern overlay -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-opacity="0.015" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Top highlight band -->
+  <rect width="1200" height="200" fill="url(#topHighlight)"/>
+
+  <!-- Glow effect behind logo -->
+  <ellipse cx="200" cy="270" rx="180" ry="180" fill="url(#glow)"/>
+
+  <!-- Logo group - shield with document and checkmark -->
+  <g transform="translate(120, 195) scale(2.8)">
+    <!-- Shield body -->
+    <path d="M8,0 L40,0 C44,0 48,4 48,8 L48,34 C48,44 28,52 24,54 C20,52 0,44 0,34 L0,8 C0,4 4,0 8,0 Z" fill="url(#shieldGrad)"/>
+    <!-- Shield inner highlight -->
+    <path d="M8,1 L40,1 C43.5,1 47,4.5 47,8 L47,34 C47,43 28,51 24,53 C20,51 1,43 1,34 L1,8 C1,4.5 4.5,1 8,1 Z" fill="none" stroke="#ffffff" stroke-opacity="0.15" stroke-width="0.5"/>
+
+    <!-- Document lines -->
+    <rect x="12" y="12" width="18" height="2" rx="1" fill="#ffffff" opacity="0.9"/>
+    <rect x="12" y="18" width="22" height="2" rx="1" fill="#ffffff" opacity="0.7"/>
+    <rect x="12" y="24" width="15" height="2" rx="1" fill="#ffffff" opacity="0.5"/>
+
+    <!-- Green checkmark circle -->
+    <circle cx="35.51" cy="32.76" r="8" fill="#10b981"/>
+    <circle cx="35.51" cy="32.76" r="8" fill="none" stroke="#ffffff" stroke-opacity="0.2" stroke-width="0.5"/>
+    <!-- Checkmark -->
+    <path d="M31.5,32.76 L34,35.26 L39.5,29.76" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Brand name -->
+  <text x="330" y="255" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="#ffffff" letter-spacing="-1">LexiReview</text>
+
+  <!-- Tagline -->
+  <text x="334" y="305" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#94a3b8" letter-spacing="0.5">AI Contract Intelligence for Indian Law</text>
+
+  <!-- Decorative accent line under tagline -->
+  <rect x="334" y="325" width="80" height="3" rx="1.5" fill="#2563eb" opacity="0.8"/>
+  <rect x="424" y="325" width="30" height="3" rx="1.5" fill="#10b981" opacity="0.6"/>
+
+  <!-- Bottom stats strip background -->
+  <rect x="0" y="490" width="1200" height="80" fill="#0f172a" opacity="0.6"/>
+  <line x1="60" y1="490" x2="1140" y2="490" stroke="#2563eb" stroke-opacity="0.15" stroke-width="1"/>
+
+  <!-- Stats strip content -->
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" transform="translate(0, 540)">
+    <!-- Stat 1 -->
+    <text x="155" y="0" font-size="19" text-anchor="middle">
+      <tspan font-weight="700" fill="#ffffff">6 </tspan><tspan font-weight="400" fill="#94a3b8">AI Engines</tspan>
+    </text>
+
+    <!-- Separator -->
+    <text x="310" y="0" font-size="19" fill="#334e68" text-anchor="middle">|</text>
+
+    <!-- Stat 2 -->
+    <text x="465" y="0" font-size="19" text-anchor="middle">
+      <tspan font-weight="700" fill="#ffffff">45 </tspan><tspan font-weight="400" fill="#94a3b8">Seconds</tspan>
+    </text>
+
+    <!-- Separator -->
+    <text x="610" y="0" font-size="19" fill="#334e68" text-anchor="middle">|</text>
+
+    <!-- Stat 3 -->
+    <text x="755" y="0" font-size="19" text-anchor="middle">
+      <tspan font-weight="700" fill="#ffffff">98.5% </tspan><tspan font-weight="400" fill="#94a3b8">Accuracy</tspan>
+    </text>
+
+    <!-- Separator -->
+    <text x="905" y="0" font-size="19" fill="#334e68" text-anchor="middle">|</text>
+
+    <!-- Stat 4 -->
+    <text x="1055" y="0" font-size="19" text-anchor="middle">
+      <tspan font-weight="700" fill="#ffffff">150+ </tspan><tspan font-weight="400" fill="#94a3b8">Legal Teams</tspan>
+    </text>
+  </g>
+
+  <!-- Subtle border -->
+  <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+</svg>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 54">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+
+      .cls-4, .cls-5, .cls-6 {
+        fill: #fff;
+      }
+
+      .cls-7 {
+        fill: #10b981;
+      }
+
+      .cls-5 {
+        opacity: .35;
+      }
+
+      .cls-5, .cls-6 {
+        isolation: isolate;
+      }
+
+      .cls-6 {
+        opacity: .45;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="-578.38" y1="471.53" x2="-577.38" y2="470.53" gradientTransform="translate(27764.87 25459.71) scale(48 -54)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-578.38" y1="471.53" x2="-577.38" y2="470.53" gradientTransform="translate(27764.87 25459.71) scale(48 -54)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <path class="cls-2" d="M8,0h32c4,0,8,4,8,8v26c0,10-20,18-24,20C20,52,0,44,0,34V8C0,4,4,0,8,0Z"/>
+      <path class="cls-1" d="M8,0h32c4,0,8,4,8,8v26c0,10-20,18-24,20C20,52,0,44,0,34V8C0,4,4,0,8,0Z"/>
+      <path class="cls-6" d="M13.25,12h11.5c.69,0,1.25.56,1.25,1.25h0c0,.69-.56,1.25-1.25,1.25h-11.5c-.69,0-1.25-.56-1.25-1.25h0c0-.69.56-1.25,1.25-1.25Z"/>
+      <path class="cls-6" d="M13.25,18h17.5c.69,0,1.25.56,1.25,1.25h0c0,.69-.56,1.25-1.25,1.25H13.25c-.69,0-1.25-.56-1.25-1.25h0c0-.69.56-1.25,1.25-1.25Z"/>
+      <path class="cls-5" d="M13.25,24h7.5c.69,0,1.25.56,1.25,1.25h0c0,.69-.56,1.25-1.25,1.25h-7.5c-.69,0-1.25-.56-1.25-1.25h0c0-.69.56-1.25,1.25-1.25Z"/>
+      <circle class="cls-4" cx="35.51" cy="32.76" r="8.76"/>
+      <circle class="cls-7" cx="35.51" cy="32.76" r="7.01"/>
+      <polyline class="cls-3" points="31.72 32.73 34.01 35.41 39.74 29.68"/>
+    </g>
+  </g>
+</svg>

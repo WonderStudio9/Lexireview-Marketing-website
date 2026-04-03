@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 49.53 10.87">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: .25px;
+      }
+
+      .cls-4, .cls-5, .cls-6 {
+        fill: #fff;
+      }
+
+      .cls-7 {
+        fill: #2563eb;
+      }
+
+      .cls-7, .cls-8 {
+        font-family: HelveticaNeue-Bold, 'Helvetica Neue';
+        font-size: 6.36px;
+        font-weight: 700;
+        letter-spacing: -.01em;
+      }
+
+      .cls-7, .cls-8, .cls-9, .cls-5, .cls-6 {
+        isolation: isolate;
+      }
+
+      .cls-8 {
+        fill: #0f172a;
+      }
+
+      .cls-10 {
+        fill: #10b981;
+      }
+
+      .cls-9 {
+        fill: #94a3b8;
+        font-family: Poppins-Medium, Poppins;
+        font-size: 1.89px;
+        font-weight: 500;
+        letter-spacing: .26em;
+      }
+
+      .cls-5 {
+        opacity: .35;
+      }
+
+      .cls-6 {
+        opacity: .45;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="-503.2" y1="536.12" x2="-503.02" y2="535.94" gradientTransform="translate(24154.29 28949.84) scale(48 -54)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-503.2" y1="536.12" x2="-503.02" y2="535.94" gradientTransform="translate(24154.29 28949.84) scale(48 -54)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <path class="cls-2" d="M1.45,0h5.79c.72,0,1.45.72,1.45,1.45v4.71c0,1.81-3.62,3.26-4.34,3.62-.72-.36-4.34-1.81-4.34-3.62V1.45C0,.72.72,0,1.45,0Z"/>
+      <path class="cls-1" d="M1.45,0h5.79c.72,0,1.45.72,1.45,1.45v4.71c0,1.81-3.62,3.26-4.34,3.62-.72-.36-4.34-1.81-4.34-3.62V1.45C0,.72.72,0,1.45,0Z"/>
+      <path class="cls-6" d="M2.4,2.17h2.08c.12,0,.23.1.23.23h0c0,.12-.1.23-.23.23h-2.08c-.12,0-.23-.1-.23-.23h0c0-.12.1-.23.23-.23Z"/>
+      <path class="cls-6" d="M2.4,3.26h3.17c.12,0,.23.1.23.23h0c0,.12-.1.23-.23.23h-3.17c-.12,0-.23-.1-.23-.23h0c0-.12.1-.23.23-.23Z"/>
+      <path class="cls-5" d="M2.4,4.34h1.36c.12,0,.23.1.23.23h0c0,.12-.1.23-.23.23h-1.36c-.12,0-.23-.1-.23-.23h0c0-.12.1-.23.23-.23Z"/>
+      <circle class="cls-4" cx="6.43" cy="5.93" r="1.59"/>
+      <circle class="cls-10" cx="6.43" cy="5.93" r="1.27"/>
+      <polyline class="cls-3" points="5.74 5.93 6.16 6.41 7.19 5.37"/>
+    </g>
+    <text class="cls-8" transform="translate(12.58 6.8)"><tspan x="0" y="0">Lexi</tspan></text>
+    <text class="cls-7" transform="translate(27.28 6.8)"><tspan x="0" y="0">Review</tspan></text>
+    <text class="cls-9" transform="translate(12.58 9.78)"><tspan x="0" y="0">AI CONTRACT INTELLIGENCE</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ContentStatus {
+  BRIEFED
+  STRATEGY
+  DRAFTING
+  LEGAL_REVIEW
+  SEO_OPTIMIZATION
+  QUALITY_CHECK
+  APPROVED
+  PUBLISHED
+  REJECTED
+}
+
+enum FunnelStage {
+  TOFU
+  MOFU
+  BOFU
+}
+
+enum ContentChannel {
+  BLOG
+  LINKEDIN
+  EMAIL
+  LANDING_PAGE
+  WHITEPAPER
+  VIDEO_SCRIPT
+  CAROUSEL
+}
+
+model ContentBrief {
+  id          String         @id @default(cuid())
+  topic       String
+  icp         String
+  channel     ContentChannel
+  funnelStage FunnelStage
+  cluster     String
+  keywords    String[]
+  competitors String[]
+  angle       String?
+  status      ContentStatus  @default(BRIEFED)
+  priority    Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  drafts      ContentDraft[]
+  agentLogs   AgentLog[]
+  published   PublishedContent?
+}
+
+model ContentDraft {
+  id           String       @id @default(cuid())
+  briefId      String
+  brief        ContentBrief @relation(fields: [briefId], references: [id], onDelete: Cascade)
+  version      Int          @default(1)
+  title        String?
+  bodyMdx      String?
+  metaTitle    String?
+  metaDesc     String?
+  agentOutputs Json?
+  qualityScore Int?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@index([briefId])
+}
+
+model AgentLog {
+  id         String       @id @default(cuid())
+  briefId    String?
+  brief      ContentBrief? @relation(fields: [briefId], references: [id], onDelete: SetNull)
+  agentName  String
+  action     String
+  input      Json?
+  output     Json?
+  durationMs Int?
+  error      String?
+  createdAt  DateTime     @default(now())
+
+  @@index([briefId])
+  @@index([agentName])
+  @@index([createdAt])
+}
+
+model Keyword {
+  id          String        @id @default(cuid())
+  cluster     String
+  keyword     String
+  intent      String
+  funnelStage FunnelStage
+  currentRank Int?
+  lastChecked DateTime?
+  createdAt   DateTime      @default(now())
+
+  snapshots   SeoSnapshot[]
+
+  @@unique([cluster, keyword])
+}
+
+model SeoSnapshot {
+  id        String   @id @default(cuid())
+  keywordId String
+  keyword   Keyword  @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+  rank      Int?
+  serpData  Json?
+  checkedAt DateTime @default(now())
+
+  @@index([keywordId])
+  @@index([checkedAt])
+}
+
+model AiCitation {
+  id        String   @id @default(cuid())
+  engine    String
+  query     String
+  cited     Boolean  @default(false)
+  snippet   String?
+  url       String?
+  checkedAt DateTime @default(now())
+
+  @@index([engine])
+  @@index([checkedAt])
+}
+
+model PublishedContent {
+  id          String       @id @default(cuid())
+  briefId     String       @unique
+  brief       ContentBrief @relation(fields: [briefId], references: [id], onDelete: Cascade)
+  slug        String       @unique
+  title       String
+  metaTitle   String?
+  metaDesc    String?
+  bodyMdx     String
+  ogImage     String?
+  schema      Json?
+  publishedAt DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([slug])
+}
+
+model CronJob {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  schedule  String
+  taskType  String
+  config    Json?
+  enabled   Boolean  @default(true)
+  lastRunAt DateTime?
+  nextRunAt DateTime?
+  createdAt DateTime @default(now())
+}
