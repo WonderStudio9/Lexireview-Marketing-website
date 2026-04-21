@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Sidebar } from "@/components/forge/sidebar"
+import { CommandPalette } from "@/components/forge/command-palette"
 
 export const metadata: Metadata = {
   title: "LexiForge Dashboard",
@@ -14,6 +15,7 @@ export default function ForgeLayout({
   return (
     <div className="dark min-h-screen bg-slate-900 text-white">
       <Sidebar />
+      <CommandPalette />
       {/* Main content area */}
       <main className="lg:pl-60">
         <div className="pt-14 min-h-screen">

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import {
   LayoutDashboard,
   GitBranch,
@@ -19,6 +19,7 @@ import {
   Building2,
   Contact,
   Send,
+  LogOut,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -29,7 +30,6 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 const navItems = [
@@ -48,6 +48,22 @@ const navItems = [
 
 function NavContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname()
+  const router = useRouter()
+  const [loggingOut, setLoggingOut] = React.useState(false)
+
+  async function handleLogout() {
+    if (loggingOut) return
+    setLoggingOut(true)
+    try {
+      await fetch("/api/auth", { method: "DELETE" })
+    } catch {
+      // ignore network errors — still redirect
+    } finally {
+      onNavigate?.()
+      router.push("/forge/login")
+      router.refresh()
+    }
+  }
 
   return (
     <div className="flex flex-col h-full">
@@ -87,9 +103,9 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
         })}
       </nav>
 
-      {/* User */}
-      <div className="px-3 py-4 border-t border-white/[0.06]">
-        <div className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-white/[0.04] transition-colors cursor-pointer">
+      {/* User + Logout */}
+      <div className="px-3 py-4 border-t border-white/[0.06] space-y-1">
+        <div className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-white/[0.04] transition-colors">
           <Avatar className="w-7 h-7">
             <AvatarFallback className="bg-teal-500/20 text-teal-400 text-xs font-medium">
               PR
@@ -100,6 +116,18 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
             <p className="text-xs text-slate-500 truncate">admin@lexiforge.io</p>
           </div>
         </div>
+        <button
+          onClick={handleLogout}
+          disabled={loggingOut}
+          className={cn(
+            "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+            "text-slate-400 hover:text-white hover:bg-white/[0.04]",
+            "disabled:opacity-60 disabled:cursor-not-allowed",
+          )}
+        >
+          <LogOut className="w-4 h-4 shrink-0" />
+          {loggingOut ? "Signing out..." : "Logout"}
+        </button>
       </div>
     </div>
   )
@@ -153,13 +181,27 @@ export function Sidebar() {
       <header className="hidden lg:flex items-center gap-4 fixed top-0 left-60 right-0 z-30 h-14 px-6 bg-slate-900/80 backdrop-blur-sm border-b border-white/[0.06]">
         <h1 className="text-base font-semibold text-white">{pageTitle}</h1>
         <div className="flex-1" />
-        <div className="relative w-64">
-          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
-          <Input
-            placeholder="Search..."
-            className="h-8 pl-8 bg-white/[0.04] border-white/[0.06] text-sm text-slate-300 placeholder:text-slate-500 focus-visible:border-teal-500/50 focus-visible:ring-teal-500/20"
-          />
-        </div>
+        <button
+          type="button"
+          onClick={() => {
+            // Dispatch a synthetic Cmd/Ctrl+K to trigger the global palette.
+            window.dispatchEvent(
+              new KeyboardEvent("keydown", {
+                key: "k",
+                metaKey: true,
+                ctrlKey: true,
+                bubbles: true,
+              }),
+            )
+          }}
+          className="relative w-64 flex items-center gap-2 h-8 pl-2.5 pr-2 rounded-md bg-white/[0.04] ring-1 ring-white/[0.06] text-sm text-slate-500 hover:text-slate-300 hover:ring-teal-500/30 transition"
+        >
+          <Search className="w-3.5 h-3.5" />
+          <span className="flex-1 text-left">Search...</span>
+          <kbd className="inline-flex items-center gap-0.5 px-1.5 h-5 rounded bg-white/[0.05] ring-1 ring-white/[0.08] text-[10px] text-slate-400">
+            ⌘K
+          </kbd>
+        </button>
         <Button variant="ghost" size="icon" className="relative text-slate-400 hover:text-white">
           <Bell className="w-4 h-4" />
           <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-teal-400 rounded-full" />

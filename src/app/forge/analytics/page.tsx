@@ -1,285 +1,343 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Loader2, TrendingUp, TrendingDown, Minus } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { StatsCard } from "@/components/forge/stats-card"
+import * as React from "react";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import {
-  Search,
+  Loader2,
+  TrendingUp,
+  Users,
   Target,
-  Award,
-  Hash,
-} from "lucide-react"
+  UserPlus,
+  ShoppingCart,
+  XCircle,
+  BarChart3,
+} from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { StatsCard } from "@/components/forge/stats-card";
 
-interface KeywordData {
-  id: string
-  cluster: string
-  keyword: string
-  currentRank: number | null
-  lastChecked: string | null
+interface Funnel {
+  totalLeads: number;
+  mqlLeads: number;
+  sqlLeads: number;
+  trialLeads: number;
+  customerLeads: number;
+  churnedLeads: number;
+  mqlToSqlRate: number;
+  sqlToTrialRate: number;
+  trialToCustomerRate: number;
 }
 
-interface ClusterSummary {
-  name: string
-  keywords: number
-  avgRank: number
-  top10: number
-  top50: number
-  trend: "up" | "down" | "flat"
+interface SourceRow {
+  source: string;
+  count: number;
 }
 
-interface SeoStats {
-  totalKeywords: number
-  rankingTop10: number
-  rankingTop50: number
-  notRanking: number
+interface TierRow {
+  tier: string;
+  count: number;
 }
 
-interface CitationEngine {
-  total: number
-  cited: number
+interface AnalyticsData {
+  funnel: Funnel;
+  bySource: SourceRow[];
+  byTier: TierRow[];
 }
+
+const tierColors: Record<string, string> = {
+  CITIZEN: "bg-emerald-500",
+  SMB: "bg-blue-500",
+  MID_MARKET: "bg-indigo-500",
+  ENTERPRISE: "bg-amber-500",
+  GOVERNMENT: "bg-purple-500",
+};
+
+const sourceColors: Record<string, string> = {
+  ORGANIC_BLOG: "bg-teal-500",
+  ORGANIC_TOOL: "bg-cyan-500",
+  ORGANIC_LANDING: "bg-blue-500",
+  PAID_GOOGLE: "bg-amber-500",
+  PAID_LINKEDIN: "bg-purple-500",
+  SOCIAL_LINKEDIN: "bg-indigo-500",
+  SOCIAL_QUORA: "bg-red-500",
+  SOCIAL_REDDIT: "bg-orange-500",
+  SOCIAL_MEDIUM: "bg-emerald-500",
+  REFERRAL: "bg-pink-500",
+  OUTBOUND_EMAIL: "bg-fuchsia-500",
+  OUTBOUND_LINKEDIN: "bg-violet-500",
+  DIRECT: "bg-slate-500",
+  UNKNOWN: "bg-slate-600",
+};
 
 export default function AnalyticsPage() {
-  const [loading, setLoading] = React.useState(true)
-  const [error, setError] = React.useState<string | null>(null)
-  const [clusters, setClusters] = React.useState<ClusterSummary[]>([])
-  const [stats, setStats] = React.useState<SeoStats>({
-    totalKeywords: 0,
-    rankingTop10: 0,
-    rankingTop50: 0,
-    notRanking: 0,
-  })
-  const [citationEngines, setCitationEngines] = React.useState<
-    Array<{ name: string; citations: number; color: string }>
-  >([])
+  const [loading, setLoading] = React.useState(true);
+  const [data, setData] = React.useState<AnalyticsData | null>(null);
+  const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    Promise.all([
-      fetch("/api/seo?type=keywords").then((r) => {
-        if (!r.ok) throw new Error(`Keywords API: HTTP ${r.status}`)
-        return r.json()
-      }),
-      fetch("/api/seo?type=citations").then((r) => {
-        if (!r.ok) throw new Error(`Citations API: HTTP ${r.status}`)
-        return r.json()
-      }),
-    ])
-      .then(([keywordData, citationData]) => {
-        // Process keyword clusters
-        if (keywordData.stats) {
-          setStats(keywordData.stats)
-        }
-
-        if (keywordData.clusters) {
-          const engineColors: Record<string, string> = {
-            Perplexity: "#22d3ee",
-            ChatGPT: "#10b981",
-            "Google AI Overview": "#6366f1",
-            "Bing Copilot": "#f59e0b",
-          }
-
-          const clusterSummaries: ClusterSummary[] = Object.entries(
-            keywordData.clusters as Record<string, KeywordData[]>
-          ).map(([name, keywords]) => {
-            const ranked = keywords.filter((k) => k.currentRank !== null)
-            const avgRank =
-              ranked.length > 0
-                ? ranked.reduce((sum, k) => sum + (k.currentRank || 0), 0) / ranked.length
-                : 0
-            const top10 = keywords.filter(
-              (k) => k.currentRank !== null && k.currentRank <= 10
-            ).length
-            const top50 = keywords.filter(
-              (k) => k.currentRank !== null && k.currentRank <= 50
-            ).length
-
-            return {
-              name,
-              keywords: keywords.length,
-              avgRank: Number(avgRank.toFixed(1)),
-              top10,
-              top50,
-              trend: "flat" as const,
-            }
-          })
-
-          setClusters(clusterSummaries.sort((a, b) => b.keywords - a.keywords))
-        }
-
-        // Process citations
-        if (citationData.byEngine) {
-          const defaultColors: Record<string, string> = {
-            Perplexity: "#22d3ee",
-            ChatGPT: "#10b981",
-            "Google AI Overview": "#6366f1",
-            "Bing Copilot": "#f59e0b",
-          }
-          const colorFallbacks = ["#ec4899", "#8b5cf6", "#f97316", "#14b8a6"]
-          let colorIdx = 0
-
-          const engines = Object.entries(
-            citationData.byEngine as Record<string, CitationEngine>
-          ).map(([name, data]) => ({
-            name,
-            citations: data.cited,
-            color:
-              defaultColors[name] ||
-              colorFallbacks[colorIdx++ % colorFallbacks.length],
-          }))
-
-          setCitationEngines(engines)
-        }
-
-        setLoading(false)
+    fetch("/api/attribution")
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
       })
-      .catch((err) => {
-        setError(err.message)
-        setLoading(false)
+      .then((d) => {
+        setData(d);
+        setLoading(false);
       })
-  }, [])
+      .catch((e) => {
+        setError(e.message);
+        setLoading(false);
+      });
+  }, []);
 
-  if (loading) {
+  if (loading)
     return (
       <div className="flex items-center justify-center h-96">
         <Loader2 className="w-6 h-6 text-teal-400 animate-spin" />
       </div>
-    )
-  }
+    );
 
-  if (error) {
+  if (error || !data)
     return (
-      <div className="flex items-center justify-center h-96 text-red-400">
-        Failed to load analytics: {error}
-      </div>
-    )
-  }
+      <div className="text-red-400 p-4">Failed to load analytics: {error}</div>
+    );
+
+  const { funnel, bySource, byTier } = data;
+
+  const overallConversionRate =
+    funnel.totalLeads > 0
+      ? (funnel.customerLeads / funnel.totalLeads) * 100
+      : 0;
 
   return (
     <div className="space-y-6">
-      {/* Keyword Stats */}
+      {/* Top KPIs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <StatsCard
-          title="Total Keywords"
-          value={stats.totalKeywords}
-          icon={Hash}
+          title="Total Leads"
+          value={funnel.totalLeads}
+          icon={Users}
         />
         <StatsCard
-          title="Ranking Top 10"
-          value={stats.rankingTop10}
-          icon={Award}
-        />
-        <StatsCard
-          title="Ranking Top 50"
-          value={stats.rankingTop50}
+          title="Qualified (MQL + SQL)"
+          value={funnel.mqlLeads + funnel.sqlLeads}
           icon={Target}
+          subtitle={`${((funnel.mqlLeads + funnel.sqlLeads) / Math.max(funnel.totalLeads, 1) * 100).toFixed(1)}% of total`}
         />
         <StatsCard
-          title="Not Ranking"
-          value={stats.notRanking}
-          icon={Search}
+          title="Customers"
+          value={funnel.customerLeads}
+          icon={ShoppingCart}
+          subtitle={`${overallConversionRate.toFixed(2)}% conversion`}
+        />
+        <StatsCard
+          title="Churned"
+          value={funnel.churnedLeads}
+          icon={XCircle}
         />
       </div>
 
-      {/* Cluster Performance Table */}
+      {/* Funnel stages */}
       <Card className="bg-white/[0.03] border-0 ring-1 ring-white/[0.06] text-white">
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-semibold text-white">
-            Cluster Performance
-          </CardTitle>
+          <div className="flex items-center gap-2">
+            <BarChart3 size={14} className="text-teal-400" />
+            <CardTitle className="text-sm font-semibold text-white">
+              Conversion Funnel
+            </CardTitle>
+          </div>
         </CardHeader>
         <CardContent>
-          {clusters.length === 0 ? (
-            <p className="text-center py-8 text-slate-500">
-              No keyword data yet. Run a keyword seed or SEO check to populate.
-            </p>
-          ) : (
-            <Table>
-              <TableHeader>
-                <TableRow className="border-white/[0.06] hover:bg-transparent">
-                  <TableHead className="text-slate-400 text-xs">Cluster</TableHead>
-                  <TableHead className="text-slate-400 text-xs text-right">Keywords</TableHead>
-                  <TableHead className="text-slate-400 text-xs text-right">Avg Rank</TableHead>
-                  <TableHead className="text-slate-400 text-xs text-right">Top 10</TableHead>
-                  <TableHead className="text-slate-400 text-xs text-right">Top 50</TableHead>
-                  <TableHead className="text-slate-400 text-xs text-center">Trend</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {clusters.map((cluster) => (
-                  <TableRow key={cluster.name} className="border-white/[0.04] hover:bg-white/[0.02]">
-                    <TableCell className="text-sm text-slate-200 font-medium">
-                      {cluster.name}
-                    </TableCell>
-                    <TableCell className="text-right text-sm text-slate-300 tabular-nums">
-                      {cluster.keywords}
-                    </TableCell>
-                    <TableCell className="text-right text-sm text-slate-300 tabular-nums">
-                      {cluster.avgRank > 0 ? cluster.avgRank.toFixed(1) : "--"}
-                    </TableCell>
-                    <TableCell className="text-right text-sm text-slate-300 tabular-nums">
-                      {cluster.top10}
-                    </TableCell>
-                    <TableCell className="text-right text-sm text-slate-300 tabular-nums">
-                      {cluster.top50}
-                    </TableCell>
-                    <TableCell className="text-center">
-                      {cluster.trend === "up" && <TrendingUp className="w-4 h-4 text-teal-400 mx-auto" />}
-                      {cluster.trend === "down" && <TrendingDown className="w-4 h-4 text-red-400 mx-auto" />}
-                      {cluster.trend === "flat" && <Minus className="w-4 h-4 text-slate-500 mx-auto" />}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
+          <div className="space-y-4">
+            <FunnelStep
+              label="Total Leads"
+              count={funnel.totalLeads}
+              total={funnel.totalLeads}
+              color="bg-slate-400"
+            />
+            <FunnelStep
+              label="MQL (Marketing Qualified)"
+              count={funnel.mqlLeads}
+              total={funnel.totalLeads}
+              color="bg-blue-500"
+            />
+            <FunnelStep
+              label="SQL (Sales Qualified)"
+              count={funnel.sqlLeads}
+              total={funnel.totalLeads}
+              color="bg-cyan-500"
+            />
+            <FunnelStep
+              label="Trial Started"
+              count={funnel.trialLeads}
+              total={funnel.totalLeads}
+              color="bg-indigo-500"
+            />
+            <FunnelStep
+              label="Customer"
+              count={funnel.customerLeads}
+              total={funnel.totalLeads}
+              color="bg-emerald-500"
+            />
+          </div>
+
+          {/* Conversion rates */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 pt-6 border-t border-white/[0.04]">
+            <RateCard
+              label="MQL → SQL"
+              value={funnel.mqlToSqlRate}
+              icon={TrendingUp}
+            />
+            <RateCard
+              label="SQL → Trial"
+              value={funnel.sqlToTrialRate}
+              icon={UserPlus}
+            />
+            <RateCard
+              label="Trial → Customer"
+              value={funnel.trialToCustomerRate}
+              icon={ShoppingCart}
+            />
+          </div>
         </CardContent>
       </Card>
 
-      {/* AI Citation Tracker */}
-      <Card className="bg-white/[0.03] border-0 ring-1 ring-white/[0.06] text-white">
-        <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-semibold text-white">
-            AI Citation Tracker
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {citationEngines.length === 0 ? (
-            <p className="text-center py-8 text-slate-500">
-              No citation data yet. AI citation monitoring will populate this section.
-            </p>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-              {citationEngines.map((source) => (
-                <div
-                  key={source.name}
-                  className="rounded-lg bg-white/[0.02] ring-1 ring-white/[0.04] p-4 space-y-2"
-                >
-                  <div className="flex items-center gap-2">
-                    <div
-                      className="w-2.5 h-2.5 rounded-full"
-                      style={{ backgroundColor: source.color }}
-                    />
-                    <p className="text-xs font-medium text-slate-400">{source.name}</p>
-                  </div>
-                  <p className="text-2xl font-bold text-white tabular-nums">
-                    {source.citations}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+      {/* Source + Tier breakdowns */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+        <Card className="bg-white/[0.03] border-0 ring-1 ring-white/[0.06] text-white">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-semibold text-white">
+              Leads by Source
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {bySource.length === 0 ? (
+              <p className="text-sm text-slate-500 py-8 text-center">No data yet.</p>
+            ) : (
+              bySource
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 12)
+                .map((s) => {
+                  const total = bySource.reduce((acc, x) => acc + x.count, 0);
+                  const pct = total > 0 ? (s.count / total) * 100 : 0;
+                  return (
+                    <div key={s.source}>
+                      <div className="flex items-center justify-between text-xs mb-1">
+                        <span className="text-slate-300">
+                          {s.source.replace(/_/g, " ").toLowerCase()}
+                        </span>
+                        <span className="text-slate-500 tabular-nums">
+                          {s.count} ({pct.toFixed(1)}%)
+                        </span>
+                      </div>
+                      <div className="h-1.5 bg-white/[0.04] rounded-full overflow-hidden">
+                        <div
+                          className={`h-full ${sourceColors[s.source] || "bg-slate-500"}`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })
+            )}
+          </CardContent>
+        </Card>
+
+        <Card className="bg-white/[0.03] border-0 ring-1 ring-white/[0.06] text-white">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-semibold text-white">
+              Leads by Tier (ICP)
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {byTier.length === 0 ? (
+              <p className="text-sm text-slate-500 py-8 text-center">No data yet.</p>
+            ) : (
+              byTier
+                .sort((a, b) => b.count - a.count)
+                .map((t) => {
+                  const total = byTier.reduce((acc, x) => acc + x.count, 0);
+                  const pct = total > 0 ? (t.count / total) * 100 : 0;
+                  return (
+                    <div key={t.tier}>
+                      <div className="flex items-center justify-between text-xs mb-1">
+                        <span className="text-slate-300">
+                          {t.tier.replace(/_/g, " ")}
+                        </span>
+                        <span className="text-slate-500 tabular-nums">
+                          {t.count} ({pct.toFixed(1)}%)
+                        </span>
+                      </div>
+                      <div className="h-1.5 bg-white/[0.04] rounded-full overflow-hidden">
+                        <div
+                          className={`h-full ${tierColors[t.tier] || "bg-slate-500"}`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="text-xs text-slate-500 text-center">
+        Multi-touch attribution models (First/Last/Linear/Time-Decay/U-Shaped) available via{" "}
+        <code className="text-slate-400">/api/attribution?leadId=&lt;id&gt;&amp;model=LAST_TOUCH</code>
+      </div>
     </div>
-  )
+  );
+}
+
+function FunnelStep({
+  label,
+  count,
+  total,
+  color,
+}: {
+  label: string;
+  count: number;
+  total: number;
+  color: string;
+}) {
+  const pct = total > 0 ? (count / total) * 100 : 0;
+  return (
+    <div>
+      <div className="flex items-center justify-between text-sm mb-1.5">
+        <span className="text-slate-300">{label}</span>
+        <span className="text-slate-400 tabular-nums">
+          {count} <span className="text-[10px] text-slate-500">({pct.toFixed(1)}%)</span>
+        </span>
+      </div>
+      <div className="h-5 bg-white/[0.04] rounded-md overflow-hidden">
+        <div
+          className={`h-full ${color} transition-all duration-500`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function RateCard({
+  label,
+  value,
+  icon: Icon,
+}: {
+  label: string;
+  value: number;
+  icon: React.ElementType;
+}) {
+  return (
+    <div className="rounded-lg bg-white/[0.02] p-3">
+      <div className="flex items-center gap-2 mb-1">
+        <Icon size={12} className="text-teal-400" />
+        <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">
+          {label}
+        </span>
+      </div>
+      <div className="text-xl font-bold text-white tabular-nums">
+        {value.toFixed(1)}%
+      </div>
+    </div>
+  );
 }
