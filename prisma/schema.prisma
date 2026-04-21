@@ -7,6 +7,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ==========================================
+// CONTENT PIPELINE (existing)
+// ==========================================
+
 enum ContentStatus {
   BRIEFED
   STRATEGY
@@ -156,4 +160,654 @@ model CronJob {
   lastRunAt DateTime?
   nextRunAt DateTime?
   createdAt DateTime @default(now())
+}
+
+// ==========================================
+// REVENUE ENGINE: LEADS + ACCOUNTS + CONTACTS
+// ==========================================
+
+enum LeadTier {
+  CITIZEN
+  SMB
+  MID_MARKET
+  ENTERPRISE
+  GOVERNMENT
+}
+
+enum LeadICP {
+  // Citizens (13 segments)
+  TENANT_LANDLORD
+  HOME_BUYER
+  EMPLOYEE
+  FREELANCER
+  MSME_OWNER
+  CONTENT_CREATOR
+  STARTUP_FOUNDER_EARLY
+  NRI
+  CONSUMER_DISPUTE
+  SENIOR_CITIZEN
+  STUDENT
+  COUPLE
+  FARMER
+
+  // SMB
+  SOLO_LAWYER
+  SMALL_LAW_FIRM
+  STARTUP_FOUNDER
+  SME_OWNER
+  CA_TAX_CONSULTANT
+  HR_CONSULTANT
+  FRACTIONAL_GC
+
+  // Mid-Market
+  MID_TIER_LAW_FIRM
+  IN_HOUSE_LEGAL_TEAM
+  MID_NBFC
+  RE_DEVELOPER
+  INSURANCE_COMPANY
+  PE_VC_FIRM
+  PROCUREMENT_HEAD
+
+  // Enterprise
+  TIER1_LAW_FIRM
+  LISTED_COMPANY
+  LARGE_NBFC
+  LARGE_BANK
+  FINTECH_UNICORN
+  BIG4_CONSULTING
+  MNC_INDIA_OPS
+
+  // Government
+  CENTRAL_GOVT
+  STATE_GOVT
+  PSU
+  REGULATOR
+  COURT_TRIBUNAL
+
+  UNKNOWN
+}
+
+enum LeadStage {
+  VISITOR
+  LEAD
+  MQL
+  SQL
+  TRIAL
+  OPPORTUNITY
+  CUSTOMER
+  CHURNED
+  LOST
+  NURTURE
+}
+
+enum LeadLanguage {
+  EN
+  HI
+  TA
+  BN
+  MR
+  GU
+  TE
+  KN
+  PA
+  OR
+  ML
+}
+
+enum LeadSource {
+  ORGANIC_BLOG
+  ORGANIC_TOOL
+  ORGANIC_LANDING
+  PAID_GOOGLE
+  PAID_LINKEDIN
+  PAID_META
+  SOCIAL_LINKEDIN
+  SOCIAL_QUORA
+  SOCIAL_REDDIT
+  SOCIAL_MEDIUM
+  SOCIAL_X
+  REFERRAL
+  OUTBOUND_EMAIL
+  OUTBOUND_LINKEDIN
+  OUTBOUND_CALL
+  EVENT
+  DIRECT
+  UNKNOWN
+}
+
+model Lead {
+  id              String          @id @default(cuid())
+  email           String          @unique
+  firstName       String?
+  lastName        String?
+  phone           String?
+  linkedinUrl     String?
+
+  tier            LeadTier        @default(SMB)
+  icp             LeadICP         @default(UNKNOWN)
+  language        LeadLanguage    @default(EN)
+  source          LeadSource      @default(UNKNOWN)
+
+  firstTouchUrl   String?
+  firstTouchAt    DateTime        @default(now())
+  utmSource       String?
+  utmMedium       String?
+  utmCampaign     String?
+  utmContent      String?
+  utmTerm         String?
+  referrer        String?
+
+  icpFitScore     Int             @default(0)
+  intentScore     Int             @default(0)
+  engagementScore Int             @default(0)
+  totalScore      Int             @default(0)
+
+  stage           LeadStage       @default(LEAD)
+  stageChangedAt  DateTime        @default(now())
+  unsubscribedAt  DateTime?
+
+  accountId       String?
+  account         Account?        @relation(fields: [accountId], references: [id])
+  contacts        Contact[]
+  activities      LeadActivity[]
+  emailSends      EmailSend[]
+  deals           Deal[]
+  sequenceSubscriptions EmailSequenceSubscription[]
+  toolCompletions ToolCompletion[]
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([email])
+  @@index([tier, icp])
+  @@index([stage])
+  @@index([totalScore])
+  @@index([createdAt])
+}
+
+model Account {
+  id              String          @id @default(cuid())
+  name            String
+  domain          String?         @unique
+  industry        String?
+  subIndustry     String?
+  employees       Int?
+  revenueRange    String?
+  city            String?
+  state           String?
+  country         String          @default("IN")
+
+  tier            LeadTier        @default(SMB)
+  icp             LeadICP         @default(UNKNOWN)
+
+  linkedinUrl     String?
+  website         String?
+  enrichmentData  Json?
+
+  leads           Lead[]
+  contacts        Contact[]
+  deals           Deal[]
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([domain])
+  @@index([tier, icp])
+}
+
+model Contact {
+  id              String          @id @default(cuid())
+  accountId       String
+  account         Account         @relation(fields: [accountId], references: [id])
+
+  firstName       String
+  lastName        String?
+  email           String?
+  phone           String?
+  linkedinUrl     String?
+  title           String?
+  seniority       String?
+  department      String?
+
+  leadId          String?
+  lead            Lead?           @relation(fields: [leadId], references: [id])
+
+  outreachProspects OutreachProspect[]
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([accountId])
+  @@index([email])
+}
+
+// ==========================================
+// FREE TOOLS
+// ==========================================
+
+model Tool {
+  id               String          @id @default(cuid())
+  slug             String          @unique
+  name             String
+  shortDescription String
+  longDescription  String?
+  category         String
+  icp              LeadICP
+  language         LeadLanguage    @default(EN)
+  isActive         Boolean         @default(true)
+
+  templateConfig   Json?
+  premiumPdf       Boolean         @default(false)
+  premiumPrice     Int?
+
+  totalStarts       Int             @default(0)
+  totalCompletions  Int             @default(0)
+  totalConversions  Int             @default(0)
+  totalPremiumSales Int             @default(0)
+
+  completions      ToolCompletion[]
+
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  @@index([slug])
+  @@index([category])
+  @@index([icp])
+}
+
+model ToolCompletion {
+  id                String          @id @default(cuid())
+  toolId            String
+  tool              Tool            @relation(fields: [toolId], references: [id])
+  leadId            String?
+  lead              Lead?           @relation(fields: [leadId], references: [id])
+  inputData         Json
+  outputData        Json?
+  pdfUrl            String?
+  premiumPurchased  Boolean         @default(false)
+  razorpayPaymentId String?
+
+  createdAt         DateTime        @default(now())
+
+  @@index([toolId])
+  @@index([leadId])
+  @@index([createdAt])
+}
+
+// ==========================================
+// LEAD MAGNETS (gated PDFs)
+// ==========================================
+
+model LeadMagnet {
+  id              String          @id @default(cuid())
+  slug            String          @unique
+  title           String
+  description     String
+  pdfUrl          String
+  targetICP       LeadICP
+  language        LeadLanguage    @default(EN)
+  isActive        Boolean         @default(true)
+
+  totalDownloads  Int             @default(0)
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([slug])
+}
+
+// ==========================================
+// EMAIL SEQUENCES
+// ==========================================
+
+enum EmailSequenceTrigger {
+  LEAD_CAPTURED
+  LEAD_MAGNET_DOWNLOADED
+  TOOL_COMPLETED
+  TRIAL_STARTED
+  TRIAL_REVIEW_1_USED
+  TRIAL_REVIEW_3_USED
+  TRIAL_EXPIRED
+  FIRST_PAYMENT
+  DEMO_BOOKED
+  DEMO_NO_SHOW
+  MANUAL_ADD
+}
+
+model EmailSequence {
+  id              String          @id @default(cuid())
+  name            String
+  description     String?
+  trigger         EmailSequenceTrigger
+  targetICP       LeadICP?
+  targetTier      LeadTier?
+  isActive        Boolean         @default(true)
+
+  templates       EmailTemplate[]
+  subscribers     EmailSequenceSubscription[]
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model EmailTemplate {
+  id              String          @id @default(cuid())
+  sequenceId      String
+  sequence        EmailSequence   @relation(fields: [sequenceId], references: [id])
+  order           Int
+  delayHours      Int             @default(0)
+  subject         String
+  bodyHtml        String
+  bodyText        String
+  fromName        String          @default("LexiReview")
+  fromEmail       String          @default("hello@lexireview.in")
+  replyTo         String?
+
+  @@index([sequenceId, order])
+}
+
+model EmailSequenceSubscription {
+  id              String          @id @default(cuid())
+  sequenceId      String
+  sequence        EmailSequence   @relation(fields: [sequenceId], references: [id])
+  leadId          String
+  lead            Lead            @relation(fields: [leadId], references: [id])
+  startedAt       DateTime        @default(now())
+  currentStep     Int             @default(0)
+  completedAt     DateTime?
+  unsubscribed    Boolean         @default(false)
+
+  @@unique([sequenceId, leadId])
+  @@index([leadId])
+}
+
+model EmailSend {
+  id              String          @id @default(cuid())
+  leadId          String
+  lead            Lead            @relation(fields: [leadId], references: [id])
+  templateId      String?
+  subject         String
+  fromEmail       String
+  toEmail         String
+  bodyHtml        String
+  resendMessageId String?
+  sentAt          DateTime?
+  deliveredAt     DateTime?
+  openedAt        DateTime?
+  clickedAt       DateTime?
+  bouncedAt       DateTime?
+  complainedAt    DateTime?
+  failedAt        DateTime?
+  failureReason   String?
+
+  @@index([leadId])
+  @@index([sentAt])
+}
+
+// ==========================================
+// LEAD ACTIVITY (unified timeline)
+// ==========================================
+
+enum ActivityType {
+  PAGE_VIEW
+  BLOG_READ
+  TOOL_STARTED
+  TOOL_COMPLETED
+  LEAD_MAGNET_DOWNLOADED
+  FORM_SUBMITTED
+  EMAIL_OPENED
+  EMAIL_CLICKED
+  EMAIL_REPLIED
+  DEMO_BOOKED
+  DEMO_ATTENDED
+  TRIAL_STARTED
+  REVIEW_CREATED
+  SUBSCRIPTION_STARTED
+  PAYMENT_FAILED
+  SUBSCRIPTION_CHURNED
+  LINKEDIN_CONNECTION_REQUESTED
+  LINKEDIN_CONNECTION_ACCEPTED
+  LINKEDIN_MESSAGE_SENT
+  LINKEDIN_MESSAGE_RECEIVED
+  CALL_SCHEDULED
+  CALL_COMPLETED
+  NOTE_ADDED
+  STAGE_CHANGED
+}
+
+model LeadActivity {
+  id              String          @id @default(cuid())
+  leadId          String
+  lead            Lead            @relation(fields: [leadId], references: [id])
+  type            ActivityType
+  metadata        Json?
+  createdAt       DateTime        @default(now())
+
+  @@index([leadId])
+  @@index([type])
+  @@index([createdAt])
+}
+
+// ==========================================
+// SALES CRM: DEALS
+// ==========================================
+
+enum DealStage {
+  DISCOVERY
+  DEMO_SCHEDULED
+  DEMO_DONE
+  POC
+  PROPOSAL
+  NEGOTIATION
+  CLOSED_WON
+  CLOSED_LOST
+}
+
+model Deal {
+  id                String          @id @default(cuid())
+  name              String
+  accountId         String
+  account           Account         @relation(fields: [accountId], references: [id])
+  primaryLeadId     String?
+  primaryLead       Lead?           @relation(fields: [primaryLeadId], references: [id])
+
+  stage             DealStage       @default(DISCOVERY)
+  stageChangedAt    DateTime        @default(now())
+
+  valueINR          Int             @default(0)
+  probability       Int             @default(10)
+  weightedValue     Int             @default(0)
+
+  expectedCloseDate DateTime?
+  actualCloseDate   DateTime?
+
+  ownerId           String?
+  lossReason        String?
+
+  notes             DealNote[]
+  proposals         DealProposal[]
+
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@index([stage])
+  @@index([accountId])
+}
+
+model DealNote {
+  id              String          @id @default(cuid())
+  dealId          String
+  deal            Deal            @relation(fields: [dealId], references: [id])
+  content         String
+  authorId        String?
+  createdAt       DateTime        @default(now())
+
+  @@index([dealId])
+}
+
+model DealProposal {
+  id              String          @id @default(cuid())
+  dealId          String
+  deal            Deal            @relation(fields: [dealId], references: [id])
+  version         Int             @default(1)
+  content         String
+  pdfUrl          String?
+  sentAt          DateTime?
+  viewedAt        DateTime?
+  acceptedAt      DateTime?
+
+  @@index([dealId])
+}
+
+// ==========================================
+// OUTBOUND CAMPAIGNS
+// ==========================================
+
+enum CampaignChannel {
+  EMAIL
+  LINKEDIN
+  WHATSAPP
+  MULTI_TOUCH
+}
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+model OutreachCampaign {
+  id              String          @id @default(cuid())
+  name            String
+  description     String?
+  targetICP       LeadICP
+  channel         CampaignChannel
+  status          CampaignStatus  @default(DRAFT)
+  targetCount     Int             @default(0)
+  sentCount       Int             @default(0)
+  repliedCount    Int             @default(0)
+  positiveReplies Int             @default(0)
+  meetingsBooked  Int             @default(0)
+  dealsCreated    Int             @default(0)
+
+  steps           OutreachStep[]
+  prospects       OutreachProspect[]
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model OutreachStep {
+  id              String          @id @default(cuid())
+  campaignId      String
+  campaign        OutreachCampaign @relation(fields: [campaignId], references: [id])
+  order           Int
+  dayOffset       Int
+  channel         CampaignChannel
+  subject         String?
+  bodyTemplate    String
+  conditions      Json?
+
+  @@index([campaignId, order])
+}
+
+model OutreachProspect {
+  id              String          @id @default(cuid())
+  campaignId      String
+  campaign        OutreachCampaign @relation(fields: [campaignId], references: [id])
+  contactId       String
+  contact         Contact         @relation(fields: [contactId], references: [id])
+  currentStep     Int             @default(0)
+  status          String          @default("ACTIVE")
+  lastTouchAt     DateTime?
+  nextTouchAt     DateTime?
+
+  @@index([campaignId])
+  @@index([contactId])
+  @@index([nextTouchAt])
+}
+
+// ==========================================
+// ATTRIBUTION & ANALYTICS
+// ==========================================
+
+model Visitor {
+  id              String          @id @default(cuid())
+  anonymousId     String          @unique
+  firstSeenAt     DateTime        @default(now())
+  lastSeenAt      DateTime        @default(now())
+  firstReferrer   String?
+  firstUtmSource  String?
+  firstUtmMedium  String?
+  firstUtmCampaign String?
+
+  leadId          String?
+
+  pageViews       PageView[]
+
+  createdAt       DateTime        @default(now())
+
+  @@index([anonymousId])
+  @@index([leadId])
+}
+
+model PageView {
+  id              String          @id @default(cuid())
+  visitorId       String
+  visitor         Visitor         @relation(fields: [visitorId], references: [id])
+  path            String
+  title           String?
+  referrer        String?
+  timeOnPage      Int?
+  scrollDepth     Int?
+  utmSource       String?
+  utmMedium       String?
+  utmCampaign     String?
+  createdAt       DateTime        @default(now())
+
+  @@index([visitorId])
+  @@index([path])
+  @@index([createdAt])
+}
+
+// ==========================================
+// REFERRAL PARTNERS (citizen monetization)
+// ==========================================
+
+model ReferralPartner {
+  id              String          @id @default(cuid())
+  name            String
+  firmName        String?
+  email           String          @unique
+  phone           String?
+  specializations String[]
+  city            String?
+  state           String?
+  commissionRate  Int             @default(25)
+  totalReferrals  Int             @default(0)
+  totalEarnings   Int             @default(0)
+  isActive        Boolean         @default(true)
+
+  referrals       Referral[]
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model Referral {
+  id               String          @id @default(cuid())
+  partnerId        String
+  partner          ReferralPartner @relation(fields: [partnerId], references: [id])
+  leadId           String
+  toolSlug         String?
+  clientPaidAmount Int?
+  commissionAmount Int?
+  status           String          @default("PENDING")
+  paidAt           DateTime?
+
+  createdAt        DateTime        @default(now())
+
+  @@index([partnerId])
+  @@index([leadId])
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Header } from "@/components/marketing/header";
 import { Footer } from "@/components/marketing/footer";
+import { PageTracker } from "@/components/tracking/page-tracker";
 
 export const metadata: Metadata = {
   title: {
@@ -85,6 +87,9 @@ export default function MarketingLayout({
           }),
         }}
       />
+      <Suspense fallback={null}>
+        <PageTracker />
+      </Suspense>
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />

@@ -14,6 +14,7 @@ import {
   Bell,
   Search,
   Hexagon,
+  Users,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -29,6 +30,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 const navItems = [
   { label: "Overview", href: "/forge", icon: LayoutDashboard },
+  { label: "Leads", href: "/forge/leads", icon: Users },
   { label: "Pipeline", href: "/forge/pipeline", icon: GitBranch },
   { label: "Analytics", href: "/forge/analytics", icon: BarChart3 },
   { label: "Agents", href: "/forge/agents", icon: Bot },
