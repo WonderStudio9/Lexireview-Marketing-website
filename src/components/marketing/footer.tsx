@@ -8,6 +8,7 @@ const footerSections = [
     links: [
       { href: "/features", label: "Features" },
       { href: "/pricing", label: "Pricing" },
+      { href: "/tools", label: "Free Tools" },
       { href: "/blog", label: "Blog" },
       { href: "/resources", label: "Resources" },
     ],
@@ -18,8 +19,11 @@ const footerSections = [
       { href: "/solutions/nbfc", label: "NBFCs & Banks" },
       { href: "/solutions/banking", label: "Banking" },
       { href: "/solutions/legal-firms", label: "Law Firms" },
+      { href: "/solutions/solo-lawyers", label: "Solo Lawyers" },
+      { href: "/solutions/startups", label: "Startups" },
       { href: "/solutions/real-estate", label: "Real Estate" },
       { href: "/solutions/government", label: "Government & PSUs" },
+      { href: "/citizens", label: "For Citizens" },
     ],
   },
   {

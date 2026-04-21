@@ -10,6 +10,7 @@ import { stagger, itemFadeUp } from "@/lib/motion";
 const navLinks = [
   { href: "/solutions/nbfc", label: "Solutions", hasDropdown: true },
   { href: "/features", label: "Features" },
+  { href: "/tools", label: "Free Tools" },
   { href: "/pricing", label: "Pricing" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
