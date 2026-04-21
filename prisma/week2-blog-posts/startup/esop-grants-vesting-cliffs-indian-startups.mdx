@@ -1,0 +1,267 @@
+---
+title: "ESOP Grants, Vesting, Cliffs: Everything Indian Founders Get Wrong"
+slug: "esop-grants-vesting-cliffs-indian-startups"
+metaTitle: "ESOP Vesting India Startup: Grants, Cliffs & Tax Explained"
+metaDescription: "Everything Indian founders get wrong about ESOP grants, vesting, cliffs, Section 17(2) taxation, double taxation risk and buyback structures."
+cluster: "startups"
+tags: ["ESOP", "equity compensation", "vesting", "startup tax"]
+readTime: 13
+wordCount: 2700
+icp: "STARTUP_FOUNDER"
+---
+
+# ESOP Grants, Vesting, Cliffs: Everything Indian Founders Get Wrong
+
+The Employee Stock Option Plan is supposed to align early employees with the company's upside. In Indian startups, it routinely does the opposite — because the plan was copy-pasted from a US template, the grants were issued without board resolutions, the vesting cliff was accidentally waived for the first three hires, and the tax consequences of exercise were never explained to the employee.
+
+Then the employee quits in year three, tries to exercise, discovers they owe ₹14 lakh in perquisite tax on stock they cannot sell, and blames the founder. The founder discovers during a Series B diligence that the ESOP pool was never formally approved by shareholders. The round closes late and the cap table comes out 2% dilutive to founders because the cleanup requires a fresh authorised pool.
+
+Every step of that sequence was preventable. This guide walks through the mistakes Indian founders make with ESOPs — and the specific legal, tax and structural decisions that prevent them.
+
+<KeyTakeaway>
+- ESOPs in Indian private companies are governed by Section 62(1)(b) of the Companies Act, 2013 and the Companies (Share Capital and Debentures) Rules, 2014.
+- Section 17(2)(vi) of the Income Tax Act, 1961 treats ESOPs as perquisites taxed at exercise, creating the notorious "cash-out tax" problem.
+- The DPIIT-recognised startup tax deferment under Section 156A exists but has narrow applicability; most startups cannot rely on it.
+- Vesting schedules, cliffs, and acceleration clauses must be designed carefully to match the business's realistic employee tenure patterns.
+- Trust-based ESOP structures offer flexibility that direct grants do not, at the cost of setup complexity and ongoing administration.
+</KeyTakeaway>
+
+## The Statutory Architecture
+
+ESOPs in Indian private companies sit at the intersection of three statutes:
+
+- **Companies Act, 2013** — Section 62(1)(b) authorises the issue of shares to employees under a scheme approved by special resolution. Rule 12 of the Companies (Share Capital and Debentures) Rules, 2014 prescribes the manner of issuance.
+- **Income Tax Act, 1961** — Section 17(2)(vi) brings ESOPs within the perquisite taxation net. Section 156A (for DPIIT-recognised eligible startups) provides limited deferment.
+- **SEBI Regulations** — SEBI (Share Based Employee Benefits and Sweat Equity) Regulations, 2021 apply only to listed companies but set the direction of practice for unlisted ones.
+
+Unlisted startups do not have to follow SEBI SBEB Regulations but routinely adopt their structure because it is the market standard.
+
+## Mistake 1: Issuing Options Without Shareholder Approval
+
+The statutory starting point: a Private Limited Company cannot grant ESOPs without a special resolution of shareholders approving the scheme.
+
+Mechanically, the steps are:
+
+1. Board approves the ESOP scheme and convenes a general meeting.
+2. Shareholders pass a special resolution approving the scheme and the pool size.
+3. The scheme is filed with the Registrar of Companies in Form MGT-14 within 30 days.
+4. Individual grants are made from the approved pool by board resolution, following the scheme's allocation criteria.
+
+The modal failure: a founder creates a Notion table titled "ESOP grants" and emails employees "you will get 0.5% stock options." This is not a legally issued grant. If the round-of-funding diligence asks for the shareholder resolution authorising the pool, there is no resolution. The "grants" do not exist in any form the law recognises.
+
+## Mistake 2: Sizing the Pool Without a Dilution Model
+
+ESOP pools in Indian startups typically sit at 10–20% of fully diluted share capital, depending on stage:
+
+| Stage | Typical pool | Rationale |
+|---|---|---|
+| Pre-seed | 7–10% | Minimal senior hiring ahead |
+| Seed | 10–15% | First senior hires, especially tech and GTM |
+| Series A | 12–17% | Scaling leadership |
+| Series B+ | 15–22% | Multiple senior hires across functions |
+
+The mistake is to size the pool without modelling who it is for. A 15% pool with no structured allocation across engineering, GTM, ops and finance tends to run out exactly when the CTO or Head of Sales candidate is being closed.
+
+A useful pool plan maps pool size to specific hires over the next 18 months, with approximate ranges:
+
+- C-suite hires (CTO, CRO, CFO): 0.5%–2.0% each.
+- VP-level hires: 0.25%–0.75%.
+- Director-level hires: 0.10%–0.30%.
+- Senior IC hires (Staff engineer, Senior BD): 0.05%–0.20%.
+- Everyone else: distributed as needed.
+
+Pools that are built against a plan do not feel insufficient during a hiring push.
+
+## Mistake 3: The Cliff That Wasn't
+
+The standard Indian market schedule is four-year vesting with a one-year cliff. Nothing vests until month 12; at month 12, 25% vests; the remaining 75% vests monthly over the next 36 months.
+
+The trap: founders waive the cliff for early hires "because we've worked together informally for six months already." The well-intentioned waiver creates two problems. First, if that hire leaves at month eight, they walk away with eight months of vested options that are now a liability in the cap table. Second, the precedent means every subsequent early hire asks for the same treatment.
+
+The cleaner move: keep the cliff in place but offer a sign-on grant of fully-vested RSUs or shares to compensate for pre-joining informal work. This preserves the alignment function of the cliff while acknowledging prior contribution.
+
+<Callout variant="info" title="Backdating Grants: Do Not">
+Another variant of the cliff trap is backdating grants to align with an earlier join date. Backdating an ESOP grant to a date before the board resolution authorising it is a Companies Act violation and a tax mis-statement. The correct move is to issue the grant on the current date and, if commercial equity is a concern, use a fully-vested top-up grant to reflect the earlier commitment.
+</Callout>
+
+## Mistake 4: Misunderstanding Section 17(2)(vi) — The Tax Bomb
+
+This is the biggest, most expensive ESOP mistake in Indian startups.
+
+Section 17(2)(vi) of the Income Tax Act treats the grant of shares under an ESOP as a perquisite, valued at the difference between the Fair Market Value (FMV) of the share on the date of exercise and the exercise price paid by the employee. That perquisite is taxed as salary income at slab rates.
+
+Concretely: an employee is granted 10,000 options at an exercise price of ₹10 per share. At month 48, the employee exercises. The FMV of the share on the date of exercise is ₹500. The perquisite is (500 - 10) × 10,000 = ₹49,00,000. This ₹49 lakh is added to the employee's salary income for the year and taxed at their slab rate. If they are in the 30% bracket with surcharge and cess, roughly ₹15 lakh is payable to the tax department.
+
+The employee owes ₹15 lakh in cash. The shares are in a private company. There is no buyer. Without a company-provided buyback or liquidity event, the employee has a tax liability on paper gains they cannot realise.
+
+This is the "cash-out tax" problem, and it is the single largest reason ESOPs in Indian startups produce grievance instead of alignment.
+
+## Mistake 5: Assuming Section 156A Solves It
+
+The Finance Act, 2020 introduced Section 156A to the Income Tax Act, which allows eligible startups to defer payment of tax on ESOP perquisites until the earliest of:
+
+- 48 months from the end of the assessment year of exercise.
+- The employee's date of sale of the shares.
+- The employee's date of ceasing to be an employee.
+
+The catch: "eligible startup" is defined narrowly under Section 80-IAC. The startup must be:
+
+- Recognised by DPIIT.
+- Incorporated on or after 1 April 2016 and before the sunset date (currently 1 April 2025, subject to extension).
+- Engaged in eligible business (innovation, development or improvement of products, processes or services, or a scalable business model with a high potential of employment generation or wealth creation).
+- Having received the inter-ministerial board certificate for Section 80-IAC.
+
+In practice, only a single-digit percentage of DPIIT-recognised startups have Section 80-IAC certification. Most Indian founders who assume "we're a DPIIT startup, we're fine" are wrong.
+
+The deferment, even when available, is only a delay, not a resolution. The 48-month clock still runs, and the tax remains owed at slab rates.
+
+## Mistake 6: Treating FBT History as Current Law
+
+Older ESOP templates and internet resources reference the Fringe Benefit Tax (FBT) regime that applied to ESOPs between 2007 and 2009. FBT was abolished in 2009. Any template or advice that references FBT is outdated and should be discarded entirely.
+
+Current tax treatment of ESOPs in India follows Section 17(2)(vi) (perquisite on exercise) and Section 112A / 111A (capital gains on subsequent sale, with holding periods calculated from the date of exercise).
+
+<InlineCTA label="Review Your ESOP Plan for Indian Tax Compliance" href="https://app.lexireview.in/signup" />
+
+## Mistake 7: No Buyback Plan
+
+Because the Section 17(2) tax trigger arrives at exercise and the shares are illiquid, the only way to make ESOPs work is to create liquidity for employees.
+
+The main liquidity mechanisms for unlisted Indian startups:
+
+- **Secondary sale in a funding round.** Investors buy existing shares from employees. Often negotiated as part of the term sheet. Common from Series B onwards.
+- **Company buyback.** The company repurchases shares from employees using accumulated profits. Governed by Section 68 of the Companies Act, 2013. Subject to limits — 25% of paid-up capital and free reserves in any financial year.
+- **ESOP trust secondary.** An ESOP trust repurchases shares from exiting employees at an agreed valuation, funded by company loan or sale of fresh primary to investors.
+- **Structured liquidity programmes.** Periodic, company-organised secondary windows where investors or the company buy a capped percentage of vested-exercised shares.
+- **Exit event.** IPO, acquisition, or other change of control.
+
+Early-stage startups cannot provide meaningful buyback liquidity. The honest conversation with employees at sign-on is that ESOPs are most likely to become valuable on exit, and the probability-weighted value of the grant should be discussed openly rather than overstated.
+
+## Mistake 8: Trust vs Direct — Choosing Without Understanding
+
+Two structural options for holding ESOP shares:
+
+**Direct grant.** The company grants options directly to the employee. On exercise, the employee holds shares in the company.
+
+**Trust-based grant.** The company creates an ESOP trust. Shares are issued to the trust. The trust holds shares for employees' benefit. On exercise, the trust transfers shares to the employee.
+
+Comparison:
+
+| Feature | Direct grant | Trust-based |
+|---|---|---|
+| Setup complexity | Low | High (trust deed, trustees, separate compliance) |
+| Cap table visibility | All option-holders listed | Trust listed as holder |
+| Secondary liquidity | Harder to coordinate | Easier — trust can run buyback programme |
+| Governance | Each grant separate | Unified via trust |
+| Cost | Low | Higher (trust admin, trustee fees) |
+| Suitability | Pre-seed, seed | Late seed, Series A onwards |
+
+Most Indian startups should start with direct grants and migrate to a trust structure at Series A or later, when ESOP administration has become materially complex and a liquidity programme is contemplated.
+
+## Mistake 9: Poorly Drafted Grant Letters
+
+A grant letter that does not clearly specify vesting, exercise price, exercise window, post-termination period, cashless exercise availability, and accelerated vesting triggers is a grant letter that will produce disputes.
+
+A compliant grant letter should contain:
+
+- Number of options granted and exercise price.
+- Vesting schedule with cliff.
+- Exercise price and valuation basis.
+- Exercise window (period within which vested options can be exercised).
+- Post-termination exercise window (usually 30–90 days after leaving).
+- Treatment on death, disability and termination for cause.
+- Acceleration triggers, if any (change of control, IPO).
+- Buyback rights of the company on exit.
+- Confidentiality, non-compete during employment, non-solicitation post-employment.
+- Governing scheme document reference.
+
+All of this should be in writing, signed, and stored in the employee's personnel file.
+
+## Mistake 10: Ignoring Post-Termination Exercise
+
+When an employee leaves, what happens to vested options?
+
+The standard position in Indian ESOP schemes: vested options can be exercised within a defined window (usually 30–90 days) from the date of cessation. Unexercised options lapse. Unvested options lapse immediately on cessation.
+
+The trap: the 90-day window is an impossibly short time for a departing employee to pay the exercise price plus the perquisite tax. If the options are valuable, the employee faces a cash crunch at exactly the moment they have lost their salary. Many employees let valuable options lapse for this reason.
+
+Founder-friendly alternatives:
+
+- Extend the post-termination exercise window to 12 months for involuntary terminations.
+- Offer a cashless exercise mechanism (where possible).
+- Allow the employee to sell into a company-organised buyback within the window.
+- Allow "early exercise" (exercise of unvested options subject to company repurchase rights), which starts the capital gains clock earlier.
+
+## Mistake 11: Change-of-Control Treatment
+
+The ESOP scheme should clearly specify what happens on acquisition or IPO.
+
+Common patterns:
+
+- **Single-trigger acceleration on change of control.** All unvested options vest immediately on the transaction. Employee-friendly but rarely accepted by acquirers.
+- **Double-trigger acceleration.** Unvested options accelerate only if, within 12–18 months post-acquisition, the employee is terminated without cause or resigns for good reason. Common and balanced.
+- **No acceleration.** Options continue to vest under the acquirer. Often resisted by employees.
+
+For most startups, double-trigger is the market default.
+
+<Callout variant="warning" title="The 'Friendly Cashless' Myth">
+Founders sometimes promise "cashless exercise at exit" informally, without putting it in the scheme. On the exit transaction, legal structures usually force either cash payment from the employee or a net-settlement mechanism that requires pre-negotiated terms. A promise made over Slack is not a legal obligation. Put cashless exercise mechanics into the scheme document if that is the intent.
+</Callout>
+
+## Mistake 12: The New Labour Codes' Shadow
+
+The Code on Wages, 2019, the Code on Social Security, 2020 and the Industrial Relations Code, 2020 are being notified state-by-state. They re-architect the statutory components of employee compensation, notably:
+
+- "Wages" must be at least 50% of total remuneration (with allowances capped at 50%).
+- This affects the base salary component, which in turn affects PF, gratuity and ESOP calculations tied to "salary."
+
+Startups structuring new compensation packages should ensure the salary breakup complies with the Codes as notified in their state, and that ESOP grant letters do not inadvertently reference a "salary" definition that is out of step with the Codes.
+
+## Putting It All Together: The Minimum Viable ESOP Stack
+
+For a pre-seed to Series A startup that wants ESOPs to actually work:
+
+1. **Board-approved scheme** under Section 62(1)(b) of the Companies Act, 2013, with shareholder special resolution.
+2. **Pool size of 10–15%** at seed, 15–20% at Series A, sized against a named-hire plan.
+3. **Standard four-year vesting with one-year cliff**, no exceptions.
+4. **Written grant letters** for every employee, signed and archived.
+5. **Annual FMV valuation** by a registered valuer for Section 17(2) compliance.
+6. **Honest sign-on conversation** about the tax mechanics on exercise.
+7. **Liquidity plan** disclosed to employees — what buyback or secondary mechanism is contemplated and when.
+8. **Post-termination exercise window of 90 days minimum**, extending to 12 months for involuntary terminations.
+9. **Double-trigger acceleration on change of control.**
+10. **ESOP administration** tracked in a cap table tool (Carta, EquityList, Qapita, or similar).
+
+Done right, ESOPs are the most powerful retention and alignment tool an early-stage startup has. Done wrong, they are the reason the first five hires all quit in year three.
+
+<InlineCTA label="Audit Your ESOP Scheme with LexiReview" href="https://app.lexireview.in/signup" />
+
+## Frequently Asked Questions
+
+<FAQItem question="What is the typical ESOP vesting schedule in Indian startups?">
+The market standard in Indian startups is a four-year vesting period with a one-year cliff. This means that no options vest for the first 12 months of employment. At the end of month 12, 25% of the total grant vests in one block. The remaining 75% vests monthly over the next 36 months. Some startups use alternative schedules — five-year vesting, back-loaded vesting (20% / 20% / 25% / 35%), or milestone-based vesting for senior hires — but time-based four-year vesting with a one-year cliff remains the default and is what most investors expect to see in Series A diligence.
+</FAQItem>
+
+<FAQItem question="When are ESOPs taxed in India?">
+ESOPs are taxed at two stages under Indian law. First, on exercise, under Section 17(2)(vi) of the Income Tax Act, 1961, the difference between the Fair Market Value of the share on the date of exercise and the exercise price paid by the employee is treated as a perquisite and taxed as salary income at slab rates. Second, on subsequent sale, the difference between the sale price and the FMV at exercise is treated as capital gain under Section 112A (listed shares) or Section 112 (unlisted shares), with long-term and short-term distinctions based on holding period from the date of exercise.
+</FAQItem>
+
+<FAQItem question="Can I structure ESOPs to avoid the Section 17(2) perquisite tax?">
+You cannot avoid it, but eligible startups under Section 80-IAC can defer it. Section 156A of the Income Tax Act allows DPIIT-recognised startups with a valid Inter-Ministerial Board certificate under Section 80-IAC to defer ESOP perquisite tax until the earliest of 48 months from the end of the relevant assessment year, the employee's date of sale of the shares, or the employee's date of ceasing to be an employee. The deferment is narrow in applicability — most DPIIT-recognised startups do not hold Section 80-IAC certification. Beyond this deferment, Indian tax law provides no mechanism to avoid the perquisite tax on exercise.
+</FAQItem>
+
+<FAQItem question="Should I set up an ESOP trust or issue options directly?">
+Most startups should start with direct grants and migrate to a trust structure at Series A or later. Direct grants are simpler to administer at low volumes (fewer than 20–30 option-holders). An ESOP trust — typically an Employee Welfare Trust registered under the Indian Trusts Act, 1882 — becomes advantageous when the number of option-holders grows, when a coordinated liquidity programme is contemplated, or when flexibility in secondary transactions is valuable. Trust setup costs include the trust deed, trustee appointment and ongoing compliance, typically ₹1–3 lakh at setup and ₹50,000–₹1,50,000 annually in administration. Most startups that IPO or exit eventually operate trust-based structures, but the migration is commonly done at a later stage.
+</FAQItem>
+
+<FAQItem question="What is the minimum shareholder vote required to approve an ESOP scheme?">
+Under Section 62(1)(b) of the Companies Act, 2013, the issue of shares to employees under an ESOP scheme requires a special resolution of shareholders — meaning approval by 75% or more of the shares present and voting at a general meeting. The resolution must approve both the scheme document and the maximum number of shares that can be issued under it (the pool). Once passed, individual grants can be made by board resolution within the approved pool, provided the scheme's allocation criteria are followed. The special resolution and the scheme must be filed with the Registrar of Companies in Form MGT-14 within 30 days.
+</FAQItem>
+
+<FAQItem question="What happens to vested but unexercised ESOPs if I am fired?">
+The scheme document dictates the outcome. The Indian market default provides that vested options can be exercised within a defined window after cessation of employment, typically 30 to 90 days. Unexercised vested options lapse after this window. Unvested options lapse immediately on cessation. For terminations for cause, most schemes provide that even vested options lapse. For involuntary terminations without cause, founder-friendly schemes often extend the post-termination exercise window to 6–12 months. Employees should read the specific scheme document and grant letter carefully at sign-on rather than rely on verbal assurances.
+</FAQItem>
+
+<FAQItem question="How do I handle ESOP dilution modelling across multiple funding rounds?">
+Use a cap table tool (EquityList, Qapita, Carta India) that supports scenario modelling. Before each funding round, model the following: current outstanding and unvested options, ESOP top-up contemplated in the round (many Indian SHAs require the pool to be topped up to 12–15% of fully-diluted share capital as a condition precedent), dilution on the new share issuance, and resulting fully-diluted cap table. Most investors expect the top-up to be taken out of existing shareholders' holdings pre-money (so the dilution hits founders and existing investors, not the new investor). Modelling this explicitly before signing the term sheet prevents surprises at closing.
+</FAQItem>
