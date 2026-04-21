@@ -1,0 +1,28 @@
+{
+  "description": "Sample RBI-registered NBFCs. Replace with full RBI NBFC registry scrape (~10,000 NBFCs) when acquired.",
+  "lastUpdated": "2026-04-22",
+  "source": "RBI public NBFC registry (sample only)",
+  "count": 20,
+  "accounts": [
+    { "name": "Bajaj Finance Limited", "domain": "bajajfinserv.in", "city": "Pune", "state": "Maharashtra", "tier": "ENTERPRISE", "icp": "LARGE_NBFC", "industry": "NBFC", "subIndustry": "Diversified Lending" },
+    { "name": "Shriram Finance Limited", "domain": "shriramfinance.in", "city": "Chennai", "state": "Tamil Nadu", "tier": "ENTERPRISE", "icp": "LARGE_NBFC" },
+    { "name": "Mahindra Finance", "domain": "mahindrafinance.com", "city": "Mumbai", "state": "Maharashtra", "tier": "ENTERPRISE", "icp": "LARGE_NBFC" },
+    { "name": "HDFC Limited", "domain": "hdfc.com", "city": "Mumbai", "state": "Maharashtra", "tier": "ENTERPRISE", "icp": "LARGE_NBFC", "subIndustry": "Housing Finance" },
+    { "name": "Cholamandalam Investment", "domain": "cholamandalam.com", "city": "Chennai", "state": "Tamil Nadu", "tier": "ENTERPRISE", "icp": "LARGE_NBFC" },
+    { "name": "L&T Finance Holdings", "domain": "ltfs.com", "city": "Mumbai", "state": "Maharashtra", "tier": "ENTERPRISE", "icp": "LARGE_NBFC" },
+    { "name": "Muthoot Finance", "domain": "muthootfinance.com", "city": "Kochi", "state": "Kerala", "tier": "MID_MARKET", "icp": "MID_NBFC", "subIndustry": "Gold Loans" },
+    { "name": "Manappuram Finance", "domain": "manappuram.com", "city": "Thrissur", "state": "Kerala", "tier": "MID_MARKET", "icp": "MID_NBFC", "subIndustry": "Gold Loans" },
+    { "name": "Tata Capital", "domain": "tatacapital.com", "city": "Mumbai", "state": "Maharashtra", "tier": "ENTERPRISE", "icp": "LARGE_NBFC" },
+    { "name": "Piramal Capital & Housing Finance", "domain": "piramalfinance.com", "city": "Mumbai", "state": "Maharashtra", "tier": "ENTERPRISE", "icp": "LARGE_NBFC" },
+    { "name": "Poonawalla Fincorp", "domain": "poonawallafincorp.com", "city": "Pune", "state": "Maharashtra", "tier": "MID_MARKET", "icp": "MID_NBFC" },
+    { "name": "Ugro Capital", "domain": "ugrocapital.com", "city": "Mumbai", "state": "Maharashtra", "tier": "MID_MARKET", "icp": "MID_NBFC", "subIndustry": "MSME Lending" },
+    { "name": "Five Star Business Finance", "domain": "fivestargroup.in", "city": "Chennai", "state": "Tamil Nadu", "tier": "MID_MARKET", "icp": "MID_NBFC" },
+    { "name": "Aavas Financiers", "domain": "aavas.in", "city": "Jaipur", "state": "Rajasthan", "tier": "MID_MARKET", "icp": "MID_NBFC", "subIndustry": "Housing Finance" },
+    { "name": "CSB Bank / NBFC arm", "domain": "csb.co.in", "city": "Thrissur", "state": "Kerala", "tier": "MID_MARKET", "icp": "MID_NBFC" },
+    { "name": "SMFG India Credit", "domain": "fullertonindia.com", "city": "Mumbai", "state": "Maharashtra", "tier": "MID_MARKET", "icp": "MID_NBFC" },
+    { "name": "Hero FinCorp", "domain": "herofincorp.com", "city": "Delhi", "state": "Delhi", "tier": "MID_MARKET", "icp": "MID_NBFC" },
+    { "name": "Capital Float / Axio", "domain": "axio.co", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "MID_NBFC", "subIndustry": "Fintech Lending" },
+    { "name": "Lendingkart", "domain": "lendingkart.com", "city": "Ahmedabad", "state": "Gujarat", "tier": "SMB", "icp": "MID_NBFC", "subIndustry": "Fintech" },
+    { "name": "KreditBee", "domain": "kreditbee.in", "city": "Bengaluru", "state": "Karnataka", "tier": "SMB", "icp": "MID_NBFC", "subIndustry": "Fintech" }
+  ]
+}

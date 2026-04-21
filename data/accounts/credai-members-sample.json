@@ -1,0 +1,28 @@
+{
+  "description": "Sample CREDAI member developers across key metros. Replace with full CREDAI member scrape (~13,000 developers) when lists acquired.",
+  "lastUpdated": "2026-04-22",
+  "source": "CREDAI website + industry reports (sample only)",
+  "count": 20,
+  "accounts": [
+    { "name": "Lodha Group", "domain": "lodhagroup.in", "city": "Mumbai", "state": "Maharashtra", "tier": "ENTERPRISE", "icp": "RE_DEVELOPER", "revenueRange": "₹10,000Cr+", "industry": "Real Estate", "subIndustry": "Residential" },
+    { "name": "Godrej Properties", "domain": "godrejproperties.com", "city": "Mumbai", "state": "Maharashtra", "tier": "ENTERPRISE", "icp": "RE_DEVELOPER", "revenueRange": "₹8,000Cr+", "industry": "Real Estate", "subIndustry": "Residential+Commercial" },
+    { "name": "DLF Limited", "domain": "dlf.in", "city": "Gurgaon", "state": "Haryana", "tier": "ENTERPRISE", "icp": "RE_DEVELOPER", "revenueRange": "₹5,000Cr+", "industry": "Real Estate", "subIndustry": "Residential+Commercial" },
+    { "name": "Oberoi Realty", "domain": "oberoirealty.com", "city": "Mumbai", "state": "Maharashtra", "tier": "ENTERPRISE", "icp": "RE_DEVELOPER", "revenueRange": "₹3,000Cr+", "industry": "Real Estate" },
+    { "name": "Prestige Group", "domain": "prestigeconstructions.com", "city": "Bengaluru", "state": "Karnataka", "tier": "ENTERPRISE", "icp": "RE_DEVELOPER", "revenueRange": "₹7,000Cr+", "industry": "Real Estate" },
+    { "name": "Brigade Enterprises", "domain": "brigadegroup.com", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "RE_DEVELOPER", "revenueRange": "₹2,000-5,000Cr", "industry": "Real Estate" },
+    { "name": "Sobha Limited", "domain": "sobha.com", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "RE_DEVELOPER", "revenueRange": "₹2,000-5,000Cr", "industry": "Real Estate" },
+    { "name": "Purvankara Limited", "domain": "puravankara.com", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "RE_DEVELOPER" },
+    { "name": "Mahindra Lifespace", "domain": "mahindralifespaces.com", "city": "Mumbai", "state": "Maharashtra", "tier": "MID_MARKET", "icp": "RE_DEVELOPER" },
+    { "name": "Kolte-Patil Developers", "domain": "koltepatil.com", "city": "Pune", "state": "Maharashtra", "tier": "MID_MARKET", "icp": "RE_DEVELOPER" },
+    { "name": "Sunteck Realty", "domain": "sunteckindia.com", "city": "Mumbai", "state": "Maharashtra", "tier": "MID_MARKET", "icp": "RE_DEVELOPER" },
+    { "name": "Piramal Realty", "domain": "piramalrealty.com", "city": "Mumbai", "state": "Maharashtra", "tier": "MID_MARKET", "icp": "RE_DEVELOPER" },
+    { "name": "Shapoorji Pallonji Real Estate", "domain": "spre.in", "city": "Mumbai", "state": "Maharashtra", "tier": "ENTERPRISE", "icp": "RE_DEVELOPER" },
+    { "name": "Sumadhura Group", "domain": "sumadhura.com", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "RE_DEVELOPER" },
+    { "name": "Signature Global", "domain": "signatureglobal.in", "city": "Gurgaon", "state": "Haryana", "tier": "MID_MARKET", "icp": "RE_DEVELOPER" },
+    { "name": "Max Estates", "domain": "maxestates.com", "city": "Noida", "state": "Uttar Pradesh", "tier": "MID_MARKET", "icp": "RE_DEVELOPER" },
+    { "name": "Shriram Properties", "domain": "shriramproperties.com", "city": "Chennai", "state": "Tamil Nadu", "tier": "MID_MARKET", "icp": "RE_DEVELOPER" },
+    { "name": "Casagrand", "domain": "casagrand.co.in", "city": "Chennai", "state": "Tamil Nadu", "tier": "MID_MARKET", "icp": "RE_DEVELOPER" },
+    { "name": "Keppel Land", "domain": "keppelland.co.in", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "RE_DEVELOPER" },
+    { "name": "K Raheja Corp", "domain": "krahejacorp.com", "city": "Mumbai", "state": "Maharashtra", "tier": "ENTERPRISE", "icp": "RE_DEVELOPER" }
+  ]
+}

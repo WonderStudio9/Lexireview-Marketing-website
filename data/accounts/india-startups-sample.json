@@ -1,0 +1,28 @@
+{
+  "description": "Sample Indian startups (pre-Series B) for outbound targeting. Replace with Tracxn / Crunchbase export when subscription acquired.",
+  "lastUpdated": "2026-04-22",
+  "source": "Public startup listings (sample only)",
+  "count": 20,
+  "accounts": [
+    { "name": "Zepto", "domain": "zepto.com", "city": "Mumbai", "state": "Maharashtra", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER", "industry": "Quick Commerce", "revenueRange": "Series F" },
+    { "name": "Meesho", "domain": "meesho.com", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER", "industry": "Social Commerce" },
+    { "name": "Razorpay", "domain": "razorpay.com", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER", "industry": "Fintech" },
+    { "name": "Groww", "domain": "groww.in", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER", "industry": "Wealth Tech" },
+    { "name": "Jar", "domain": "myjar.app", "city": "Bengaluru", "state": "Karnataka", "tier": "SMB", "icp": "STARTUP_FOUNDER", "industry": "Fintech" },
+    { "name": "Apna", "domain": "apna.co", "city": "Bengaluru", "state": "Karnataka", "tier": "SMB", "icp": "STARTUP_FOUNDER", "industry": "Jobs Platform" },
+    { "name": "Urban Company", "domain": "urbancompany.com", "city": "Gurgaon", "state": "Haryana", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER" },
+    { "name": "Slice", "domain": "sliceit.com", "city": "Bengaluru", "state": "Karnataka", "tier": "SMB", "icp": "STARTUP_FOUNDER", "industry": "Fintech" },
+    { "name": "CRED", "domain": "cred.club", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER" },
+    { "name": "Licious", "domain": "licious.in", "city": "Bengaluru", "state": "Karnataka", "tier": "SMB", "icp": "STARTUP_FOUNDER" },
+    { "name": "PharmEasy", "domain": "pharmeasy.in", "city": "Mumbai", "state": "Maharashtra", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER" },
+    { "name": "Freshworks India", "domain": "freshworks.com", "city": "Chennai", "state": "Tamil Nadu", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER" },
+    { "name": "Zoho", "domain": "zoho.com", "city": "Chennai", "state": "Tamil Nadu", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER" },
+    { "name": "Zerodha", "domain": "zerodha.com", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER" },
+    { "name": "Ola Electric", "domain": "olaelectric.com", "city": "Bengaluru", "state": "Karnataka", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER" },
+    { "name": "Dream11", "domain": "dream11.com", "city": "Mumbai", "state": "Maharashtra", "tier": "MID_MARKET", "icp": "STARTUP_FOUNDER" },
+    { "name": "PhysicsWallah", "domain": "pw.live", "city": "Noida", "state": "Uttar Pradesh", "tier": "SMB", "icp": "STARTUP_FOUNDER", "industry": "EdTech" },
+    { "name": "PocketFM", "domain": "pocketfm.com", "city": "Bengaluru", "state": "Karnataka", "tier": "SMB", "icp": "STARTUP_FOUNDER", "industry": "Audio OTT" },
+    { "name": "Cashfree Payments", "domain": "cashfree.com", "city": "Bengaluru", "state": "Karnataka", "tier": "SMB", "icp": "STARTUP_FOUNDER", "industry": "Fintech" },
+    { "name": "Fampay", "domain": "fampay.in", "city": "Bengaluru", "state": "Karnataka", "tier": "SMB", "icp": "STARTUP_FOUNDER", "industry": "Fintech" }
+  ]
+}

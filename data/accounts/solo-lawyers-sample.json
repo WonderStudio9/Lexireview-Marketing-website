@@ -1,0 +1,23 @@
+{
+  "description": "Sample solo lawyers / small firms scraped from state bar council directories. Replace with full state-wise scrape (~30,000 solo practitioners) when complete.",
+  "lastUpdated": "2026-04-22",
+  "source": "State Bar Council public directories (sample only)",
+  "count": 15,
+  "accounts": [
+    { "name": "Advocate Priya Sharma & Associates", "domain": null, "city": "Mumbai", "state": "Maharashtra", "tier": "SMB", "icp": "SOLO_LAWYER", "industry": "Legal Services", "subIndustry": "Litigation" },
+    { "name": "Law Office of Rahul Mehta", "domain": null, "city": "Delhi", "state": "Delhi", "tier": "SMB", "icp": "SOLO_LAWYER" },
+    { "name": "Kumar & Co. Advocates", "domain": null, "city": "Bengaluru", "state": "Karnataka", "tier": "SMB", "icp": "SOLO_LAWYER" },
+    { "name": "Krishnan Associates", "domain": null, "city": "Chennai", "state": "Tamil Nadu", "tier": "SMB", "icp": "SOLO_LAWYER" },
+    { "name": "Gupta Law Chambers", "domain": null, "city": "Kolkata", "state": "West Bengal", "tier": "SMB", "icp": "SMALL_LAW_FIRM" },
+    { "name": "Iyer Legal Services", "domain": null, "city": "Hyderabad", "state": "Telangana", "tier": "SMB", "icp": "SOLO_LAWYER" },
+    { "name": "Desai & Partners", "domain": null, "city": "Ahmedabad", "state": "Gujarat", "tier": "SMB", "icp": "SMALL_LAW_FIRM" },
+    { "name": "Reddy Advocates", "domain": null, "city": "Hyderabad", "state": "Telangana", "tier": "SMB", "icp": "SOLO_LAWYER" },
+    { "name": "Pillai Legal Chamber", "domain": null, "city": "Kochi", "state": "Kerala", "tier": "SMB", "icp": "SOLO_LAWYER" },
+    { "name": "Singh Corporate Law Offices", "domain": null, "city": "Gurgaon", "state": "Haryana", "tier": "SMB", "icp": "SMALL_LAW_FIRM" },
+    { "name": "Joshi & Associates", "domain": null, "city": "Pune", "state": "Maharashtra", "tier": "SMB", "icp": "SOLO_LAWYER" },
+    { "name": "Malhotra Legal Counsel", "domain": null, "city": "Chandigarh", "state": "Chandigarh", "tier": "SMB", "icp": "SOLO_LAWYER" },
+    { "name": "Banerjee Law Firm", "domain": null, "city": "Kolkata", "state": "West Bengal", "tier": "SMB", "icp": "SMALL_LAW_FIRM" },
+    { "name": "Chandrasekhar & Co.", "domain": null, "city": "Chennai", "state": "Tamil Nadu", "tier": "SMB", "icp": "SMALL_LAW_FIRM" },
+    { "name": "Patel Advocates", "domain": null, "city": "Ahmedabad", "state": "Gujarat", "tier": "SMB", "icp": "SOLO_LAWYER" }
+  ]
+}

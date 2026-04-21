@@ -15,6 +15,10 @@ import {
   Search,
   Hexagon,
   Users,
+  Briefcase,
+  Building2,
+  Contact,
+  Send,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -31,6 +35,10 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 const navItems = [
   { label: "Overview", href: "/forge", icon: LayoutDashboard },
   { label: "Leads", href: "/forge/leads", icon: Users },
+  { label: "Deals", href: "/forge/deals", icon: Briefcase },
+  { label: "Accounts", href: "/forge/accounts", icon: Building2 },
+  { label: "Contacts", href: "/forge/contacts", icon: Contact },
+  { label: "Campaigns", href: "/forge/campaigns", icon: Send },
   { label: "Pipeline", href: "/forge/pipeline", icon: GitBranch },
   { label: "Analytics", href: "/forge/analytics", icon: BarChart3 },
   { label: "Agents", href: "/forge/agents", icon: Bot },
