@@ -16,7 +16,7 @@ interface MagnetSeed {
   title: string;
   description: string;
   pdfUrl: string;
-  targetICP: "SOLO_LAWYER" | "STARTUP_FOUNDER";
+  targetICP: "SOLO_LAWYER" | "STARTUP_FOUNDER" | "RE_DEVELOPER";
   language: "EN";
 }
 
@@ -37,6 +37,15 @@ const MAGNETS: MagnetSeed[] = [
       "25 pages. The 12 legal things every Indian startup founder must get right, from incorporation to ESOP grants to DPDP compliance. Written by Indian lawyers for Indian founders.",
     pdfUrl: "https://lexireview.in/lead-magnets/founder-legal-checklist",
     targetICP: "STARTUP_FOUNDER",
+    language: "EN",
+  },
+  {
+    slug: "rera-compliance-handbook",
+    title: "The Complete RERA Compliance Handbook for Developers",
+    description:
+      "90 pages. State-wise RERA rules, Section-by-Section compliance checklists, builder-buyer agreement templates, penalty framework, escrow mechanics, and a 90-day remediation playbook.",
+    pdfUrl: "https://lexireview.in/lead-magnets/rera-compliance-handbook",
+    targetICP: "RE_DEVELOPER",
     language: "EN",
   },
 ];

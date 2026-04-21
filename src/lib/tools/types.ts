@@ -56,7 +56,12 @@ export type ToolIcp =
   | "STARTUP_FOUNDER"
   | "SME_OWNER"
   | "HOME_BUYER"
-  | "SOLO_LAWYER";
+  | "SOLO_LAWYER"
+  | "MSME_OWNER"
+  | "NRI"
+  | "SENIOR_CITIZEN"
+  | "FREELANCER"
+  | "RE_DEVELOPER";
 
 // =====================================================
 // Solo Lawyer tools — shared enums
@@ -658,4 +663,504 @@ export interface CustomerMsaInput {
 export interface CustomerMsaOutput {
   msaText: string;
   metadata: { generatedAt: string; vendorName: string };
+}
+
+// =====================================================
+// Week 3 — Additional citizen tools
+// =====================================================
+
+// Tool: RTI Application Drafter
+export type RtiDeliveryMode = "Email" | "Post" | "In-person";
+
+export interface RtiApplicationInput {
+  publicAuthorityName: string;
+  publicAuthorityAddress: string;
+  picoDesignation?: string;
+  informationSought: string;
+  timePeriod: string;
+  applicantName: string;
+  applicantAddress: string;
+  applicantPhone: string;
+  applicantEmail: string;
+  isBplCategory: boolean;
+  deliveryMode: RtiDeliveryMode;
+  state: string;
+}
+
+export interface RtiApplicationOutput {
+  applicationText: string;
+  metadata: { generatedAt: string; bpl: boolean };
+}
+
+// Tool: Notice Period Rules Checker
+export type EmployeeType = "Permanent" | "Probation" | "Contract";
+export type EmployeeIndustry =
+  | "IT / ITES"
+  | "Manufacturing"
+  | "Services"
+  | "BFSI"
+  | "Healthcare"
+  | "Retail"
+  | "Other";
+
+export interface NoticePeriodInput {
+  state: string;
+  employeeType: EmployeeType;
+  tenureMonths: number;
+  industry: EmployeeIndustry;
+  contractClause?: string;
+}
+
+export interface NoticePeriodOutput {
+  applicableNoticeDays: number;
+  applicableLaw: string;
+  contractVsStatutory: string;
+  nonCompeteEnforceable: "Likely unenforceable" | "Narrowly enforceable";
+  gardenLeaveNote: string;
+  bullets: string[];
+  disclaimer: string;
+  metadata: { generatedAt: string; state: string };
+}
+
+// Tool: Gratuity Calculator
+export type GratuityCoverage = "Covered under Gratuity Act" | "Not covered";
+
+export interface GratuityInput {
+  lastBasicPlusDa: number;
+  years: number;
+  months: number;
+  coverage: GratuityCoverage;
+}
+
+export interface GratuityOutput {
+  gratuityAmount: number;
+  taxExemption: number;
+  formula: string;
+  taxNote: string;
+  eligibilityNote: string;
+  bullets: string[];
+  disclaimer: string;
+  metadata: { generatedAt: string };
+}
+
+// Tool: Salary Structure Analyzer (AI)
+export interface SalaryStructureInput {
+  salaryText: string;
+}
+
+export interface SalaryStructureAnalysis {
+  summary: string;
+  currentBreakdown: { label: string; amount: string; notes?: string }[];
+  inHandEstimate: string | null;
+  taxOptimizations: { title: string; detail: string; monthlySavingInr?: string }[];
+  hraOptimization: string;
+  ltaOptimization: string;
+  nps80ccd2: string;
+  restructureSuggestion: string[];
+  redFlags: { title: string; detail: string; severity: "high" | "medium" | "low" }[];
+  questionsForHr: string[];
+}
+
+// Tool: Partnership Deed Generator
+export type PartnershipDuration = "Fixed Term" | "At Will";
+
+export interface PartnershipPartner {
+  name: string;
+  address: string;
+  pan?: string;
+  profitSharePct: number;
+  capitalContribution: number;
+}
+
+export interface PartnershipDeedInput {
+  firmName: string;
+  businessNature: string;
+  state: string;
+  city: string;
+  partners: PartnershipPartner[];
+  bankName: string;
+  duration: PartnershipDuration;
+  fixedTermYears?: number;
+  commencementDate: string;
+}
+
+export interface PartnershipDeedOutput {
+  deedText: string;
+  metadata: { generatedAt: string; firmName: string; partnerCount: number };
+}
+
+// Tool: Will Drafter
+export type Religion = "Hindu" | "Muslim" | "Christian" | "Parsi" | "Sikh" | "Other";
+
+export interface WillAsset {
+  description: string;
+  approxValue?: number;
+}
+
+export interface WillBeneficiary {
+  name: string;
+  relationship: string;
+  sharePct: number;
+}
+
+export interface WillWitness {
+  name: string;
+  address: string;
+}
+
+export interface WillInput {
+  testatorName: string;
+  fatherName: string;
+  age: number;
+  address: string;
+  religion: Religion;
+  assets: WillAsset[];
+  beneficiaries: WillBeneficiary[];
+  executorName: string;
+  executorAddress: string;
+  witnesses: [WillWitness, WillWitness];
+  city: string;
+  state: string;
+}
+
+export interface WillOutput {
+  willText: string;
+  metadata: { generatedAt: string; testatorName: string; religion: Religion };
+}
+
+// Tool: Gift Deed Generator
+export type GiftPropertyType = "Immovable" | "Movable";
+export type GiftRelationship =
+  | "Spouse"
+  | "Parent"
+  | "Child"
+  | "Sibling"
+  | "Grandparent"
+  | "Grandchild"
+  | "Other Blood Relative"
+  | "Non-Relative";
+
+export interface GiftDeedInput {
+  donorName: string;
+  donorFather: string;
+  donorAddress: string;
+  donorPan?: string;
+  doneeName: string;
+  doneeFather: string;
+  doneeAddress: string;
+  doneePan?: string;
+  relationship: GiftRelationship;
+  propertyType: GiftPropertyType;
+  propertyDescription: string;
+  propertyValue: number;
+  state: string;
+  city: string;
+}
+
+export interface GiftDeedOutput {
+  deedText: string;
+  stampDutyEstimate: number;
+  stampDutyRatePct: number;
+  registrationRequired: boolean;
+  bullets: string[];
+  metadata: { generatedAt: string };
+}
+
+// Tool: Power of Attorney Generator
+export type PoaType = "General" | "Specific" | "Durable";
+
+export type PoaPowerKey =
+  | "Bank & Financial Operations"
+  | "Property Management"
+  | "Property Sale / Purchase"
+  | "Court Representation / Litigation"
+  | "Tax Filings & Assessments"
+  | "Company / Business Affairs"
+  | "Insurance Claims"
+  | "Rental Collection & Tenancy";
+
+export interface PoaInput {
+  poaType: PoaType;
+  principalName: string;
+  principalFather: string;
+  principalAddress: string;
+  principalIsNri: boolean;
+  attorneyName: string;
+  attorneyFather: string;
+  attorneyAddress: string;
+  powers: PoaPowerKey[];
+  validityMonths: number;
+  state: string;
+  city: string;
+}
+
+export interface PoaOutput {
+  poaText: string;
+  notarizationNote: string;
+  consularNote: string;
+  registrationNote: string;
+  bullets: string[];
+  metadata: { generatedAt: string; poaType: PoaType };
+}
+
+// Tool: Rental Receipt Generator
+export type RentPaymentMode = "Cash" | "Bank Transfer" | "UPI" | "Cheque";
+
+export interface RentalReceiptInput {
+  tenantName: string;
+  tenantAddress?: string;
+  landlordName: string;
+  landlordAddress: string;
+  landlordPan?: string;
+  propertyAddress: string;
+  monthYear: string; // e.g. 2026-04
+  amount: number;
+  paymentMode: RentPaymentMode;
+  paymentDate: string;
+}
+
+export interface RentalReceiptOutput {
+  receiptText: string;
+  tdsApplicable: boolean;
+  tdsNote: string;
+  panRequired: boolean;
+  hraNote: string;
+  metadata: { generatedAt: string };
+}
+
+// Tool: Freelancer Contract Generator (Simple)
+export type FreelancerPaymentType = "Hourly" | "Fixed Project" | "Milestone";
+
+export interface FreelancerMilestone {
+  description: string;
+  amount: number;
+  dueDate?: string;
+}
+
+export interface FreelancerContractInput {
+  freelancerName: string;
+  freelancerAddress: string;
+  freelancerPan?: string;
+  freelancerGstin?: string;
+  clientName: string;
+  clientAddress: string;
+  clientGstin?: string;
+  projectScope: string;
+  deliverables: string;
+  paymentType: FreelancerPaymentType;
+  hourlyRate?: number;
+  fixedAmount?: number;
+  milestones?: FreelancerMilestone[];
+  paymentTermDays: number;
+  ipAssignment: boolean;
+  confidentiality: boolean;
+  governingState: string;
+  startDate: string;
+  endDate?: string;
+}
+
+export interface FreelancerContractOutput {
+  contractText: string;
+  gstNote: string;
+  tdsNote: string;
+  metadata: { generatedAt: string; freelancerName: string; clientName: string };
+}
+
+// =====================================================
+// Week 3 — Real Estate Developer tools
+// =====================================================
+
+// Tool: RERA Compliance Checker
+export type ReraProjectType = "Residential" | "Commercial" | "Mixed-use";
+export type ReraRegistrationStatus =
+  | "Registered"
+  | "Pending"
+  | "Not Registered"
+  | "Exempt";
+
+export interface ReraComplianceInput {
+  state: string;
+  projectType: ReraProjectType;
+  projectAreaSqft: number;
+  plotCount: number;
+  registrationStatus: ReraRegistrationStatus;
+  carpetAreaDisclosed: boolean;
+  builtUpAreaDisclosed: boolean;
+  escrowAccount: boolean;
+  websitePublished: boolean;
+  seventyPctEscrowCompliant: boolean;
+  quarterlyUpdatesFiled: boolean;
+}
+
+export interface ReraComplianceFinding {
+  item: string;
+  section: string; // RERA Section reference
+  severity: "critical" | "high" | "medium" | "low";
+  remediation: string;
+}
+
+export interface ReraComplianceOutput {
+  score: number; // 0-100
+  status: "Compliant" | "Partially compliant" | "Non-compliant";
+  findings: ReraComplianceFinding[];
+  penaltyExposureInr: {
+    low: number;
+    high: number;
+  };
+  bullets: string[];
+  disclaimer: string;
+  metadata: { generatedAt: string; state: string };
+}
+
+// Tool: Builder-Buyer Agreement Analyzer (AI)
+export interface BuilderBuyerAnalyzerInput {
+  agreementText: string;
+}
+
+export interface BuilderBuyerAnalysis {
+  summary: string;
+  clausesIdentified: { label: string; found: boolean; notes?: string }[];
+  section18Compliance: { status: string; detail: string };
+  section13Compliance: { status: string; detail: string };
+  section14Compliance: { status: string; detail: string };
+  section19Compliance: { status: string; detail: string };
+  redFlags: { title: string; detail: string; severity: "high" | "medium" | "low" }[];
+  marketStandard: string[];
+  nonStandard: string[];
+  recommendations: string[];
+  questionsForDeveloper: string[];
+}
+
+// Tool: Real Estate Stamp Duty Calculator
+export type ReStampTransactionType =
+  | "Sale Deed"
+  | "Agreement to Sell"
+  | "Allotment Letter"
+  | "Conveyance";
+
+export interface ReStampDutyInput {
+  state: string;
+  transactionType: ReStampTransactionType;
+  propertyValue: number;
+  buyerGender: BuyerGender;
+  firstTimeBuyer: boolean;
+  city: string;
+}
+
+export interface ReStampDutyOutput {
+  stampDuty: number;
+  registrationCharges: number;
+  municipalSurcharge: number;
+  additionalLocalFees: number;
+  total: number;
+  stampDutyRatePct: number;
+  registrationRatePct: number;
+  womenConcessionApplied: boolean;
+  firstTimeBuyerRebateApplied: boolean;
+  costToClosing: number;
+  notes: string[];
+  disclaimer: string;
+}
+
+// Tool: RERA Penalty Calculator
+export type ReraViolationType =
+  | "Late Filing of Quarterly Updates"
+  | "Non-Registration"
+  | "False / Incorrect Disclosure"
+  | "Delayed Possession"
+  | "Misuse of Funds (70% Escrow)"
+  | "Continued Default";
+
+export interface ReraPenaltyInput {
+  violationType: ReraViolationType;
+  projectCostInr: number;
+  durationMonths: number;
+  numberOfViolations: number;
+}
+
+export interface ReraPenaltyOutput {
+  applicableSection: string;
+  basePenaltyInr: number;
+  perDayOrPerInstancePenaltyInr: number;
+  totalPenaltyInr: number;
+  imprisonmentRisk: string;
+  mitigations: string[];
+  bullets: string[];
+  disclaimer: string;
+  metadata: { generatedAt: string };
+}
+
+// Tool: Agreement-to-Sell Generator
+export interface AtsParty {
+  name: string;
+  fatherName: string;
+  address: string;
+  pan?: string;
+}
+
+export type StampDutyResponsibility = "Buyer" | "Seller" | "Shared (50:50)";
+
+export interface AgreementToSellInput {
+  seller: AtsParty;
+  buyer: AtsParty;
+  propertyPlotNo: string;
+  propertyKhata: string;
+  propertyBoundary: string;
+  propertyAreaSqft: number;
+  propertyAddress: string;
+  considerationAmount: number;
+  earnestMoney: number;
+  paymentSchedule: string;
+  possessionDate: string;
+  stampDutyResponsibility: StampDutyResponsibility;
+  registrationCommitment: boolean;
+  state: string;
+  city: string;
+}
+
+export interface AgreementToSellOutput {
+  agreementText: string;
+  metadata: {
+    generatedAt: string;
+    state: string;
+    considerationAmount: number;
+  };
+}
+
+// Tool: Tripartite Agreement Generator
+export type ConstructionStage =
+  | "Pre-Construction"
+  | "Foundation"
+  | "Plinth"
+  | "Slabs"
+  | "Walls"
+  | "Finishing"
+  | "Ready to Move";
+
+export interface TripartiteParty {
+  name: string;
+  address: string;
+  contact?: string;
+}
+
+export interface TripartiteAgreementInput {
+  builder: TripartiteParty;
+  buyer: TripartiteParty;
+  bank: TripartiteParty;
+  propertyDescription: string;
+  propertyAddress: string;
+  loanAmount: number;
+  constructionStage: ConstructionStage;
+  escrowMechanism: string;
+  state: string;
+  city: string;
+}
+
+export interface TripartiteAgreementOutput {
+  agreementText: string;
+  metadata: {
+    generatedAt: string;
+    state: string;
+    loanAmount: number;
+  };
 }

@@ -19,6 +19,11 @@ interface ToolSeed {
     | "STARTUP_FOUNDER"
     | "CONSUMER_DISPUTE"
     | "SOLO_LAWYER"
+    | "MSME_OWNER"
+    | "NRI"
+    | "SENIOR_CITIZEN"
+    | "FREELANCER"
+    | "RE_DEVELOPER"
     | "UNKNOWN";
   premiumPdf: boolean;
   premiumPrice: number | null; // paise
@@ -243,6 +248,206 @@ const TOOLS: ToolSeed[] = [
     icp: "STARTUP_FOUNDER",
     premiumPdf: true,
     premiumPrice: 99900, // ₹999
+  },
+
+  // ==========================================
+  // Week 3 — Real Estate Developer tools
+  // ==========================================
+  {
+    slug: "rera-compliance-checker",
+    name: "RERA Compliance Checker",
+    shortDescription:
+      "Score your project against RERA 2016 — registration, disclosure, escrow and quarterly updates",
+    longDescription:
+      "Checks your project against the key obligations under the Real Estate (Regulation and Development) Act, 2016: registration (Section 3), public disclosure (Section 11), carpet-area disclosure (Section 14), 70% escrow (Section 4(2)(l)(D)) and quarterly updates. Returns a compliance score, section-referenced findings and indicative penalty exposure.",
+    category: "real-estate-developers",
+    icp: "RE_DEVELOPER",
+    premiumPdf: true,
+    premiumPrice: 999900, // ₹9,999
+  },
+  {
+    slug: "builder-buyer-agreement-analyzer",
+    name: "Builder-Buyer Agreement Clause Analyzer",
+    shortDescription:
+      "AI-powered review of your Builder-Buyer Agreement against RERA Sections 13, 14, 18 and 19",
+    longDescription:
+      "Claude analyses your Builder-Buyer Agreement against key RERA sections (13 — advance booking, 14 — carpet area, 18 — delay penalty, 19 — allottee rights and tripartite arrangement). Flags red flags, market-standard vs non-standard clauses, and gives concrete recommendations and questions for the developer.",
+    category: "real-estate-developers",
+    icp: "RE_DEVELOPER",
+    premiumPdf: true,
+    premiumPrice: 499900, // ₹4,999
+  },
+  {
+    slug: "real-estate-stamp-duty-calculator",
+    name: "Real Estate Stamp Duty Calculator",
+    shortDescription:
+      "State-wise stamp duty, registration + local fees for Sale Deed / ATS / Allotment / Conveyance",
+    longDescription:
+      "State-wise stamp duty and registration charges for the four core real-estate transactions: Sale Deed, Agreement to Sell, Allotment Letter and Conveyance. Auto-applies women and first-time-buyer concessions. Returns a full closing-cost breakdown with municipal surcharge and additional local fees.",
+    category: "real-estate-developers",
+    icp: "RE_DEVELOPER",
+    premiumPdf: true,
+    premiumPrice: 19900, // ₹199
+  },
+  {
+    slug: "rera-penalty-calculator",
+    name: "RERA Penalty Calculator",
+    shortDescription:
+      "Indicative exposure under RERA Act Sections 59-66 with mitigation recommendations",
+    longDescription:
+      "Maps your violation (late filing / non-registration / false disclosure / delayed possession / fund misuse / continued default) to the specific RERA Section (59–66), returns base penalty and per-unit penalty computation, imprisonment risk and specific mitigation steps.",
+    category: "real-estate-developers",
+    icp: "RE_DEVELOPER",
+    premiumPdf: true,
+    premiumPrice: 299900, // ₹2,999
+  },
+  {
+    slug: "agreement-to-sell-generator",
+    name: "Agreement-to-Sell Generator",
+    shortDescription:
+      "TPA § 54 + RERA-aligned Agreement to Sell for real-estate transactions",
+    longDescription:
+      "Generate a Transfer of Property Act, 1882 Section 54-compliant Agreement to Sell. Covers consideration, earnest money, payment schedule, possession commitment, stamp duty allocation, RERA Section 13/14 alignment, and registration under the Registration Act, 1908.",
+    category: "real-estate-developers",
+    icp: "RE_DEVELOPER",
+    premiumPdf: true,
+    premiumPrice: 299900, // ₹2,999
+  },
+  {
+    slug: "tripartite-agreement-generator",
+    name: "Tripartite Agreement Generator",
+    shortDescription:
+      "Builder-Buyer-Bank tripartite per RERA § 19 + Banking Regulation Act with Builder NOC",
+    longDescription:
+      "Generate a tripartite agreement among Builder, Buyer and Lender bank, with Builder NOC for mortgage, direct loan disbursement to the project escrow account (RERA § 4(2)(l)(D)), Pre-EMI / EMI commitments, SARFAESI coordination and Section 19 compliance.",
+    category: "real-estate-developers",
+    icp: "RE_DEVELOPER",
+    premiumPdf: true,
+    premiumPrice: 399900, // ₹3,999
+  },
+
+  // ==========================================
+  // Week 3 — Additional citizen tools
+  // ==========================================
+  {
+    slug: "rti-application-drafter",
+    name: "RTI Application Drafter",
+    shortDescription:
+      "Draft an RTI application under the Right to Information Act, 2005",
+    longDescription:
+      "Generates a properly formatted RTI application addressed to the PIO with Section 6(1) reference, fee note (₹10 or BPL exemption), delivery mode, and prayer clauses. Includes first-appeal guidance.",
+    category: "citizens-consumers",
+    icp: "CONSUMER_DISPUTE",
+    premiumPdf: true,
+    premiumPrice: 29900, // ₹299
+  },
+  {
+    slug: "notice-period-rules-checker",
+    name: "Notice Period Rules Checker",
+    shortDescription:
+      "Find out the exact notice period enforceable in your state and industry",
+    longDescription:
+      "State-specific analysis under the Industrial Employment Standing Orders Act and your local Shops & Establishments Act. Checks non-compete enforceability under Section 27 of the Indian Contract Act, 1872 and garden-leave norms.",
+    category: "citizens-employees",
+    icp: "EMPLOYEE",
+    premiumPdf: true,
+    premiumPrice: 19900, // ₹199
+  },
+  {
+    slug: "gratuity-calculator",
+    name: "Gratuity Calculator",
+    shortDescription:
+      "Exact gratuity under Payment of Gratuity Act, 1972 + Section 10(10) tax",
+    longDescription:
+      "Computes gratuity using the 15/26 formula (or 1/2 for non-covered employers), applies the ₹20L Section 10(10) exemption cap, and explains eligibility, rounding and Section 4(6) forfeiture rules.",
+    category: "citizens-employees",
+    icp: "EMPLOYEE",
+    premiumPdf: true,
+    premiumPrice: 29900, // ₹299
+  },
+  {
+    slug: "salary-structure-analyzer",
+    name: "Salary Structure Analyzer",
+    shortDescription:
+      "AI analyses your CTC and suggests tax-efficient restructure",
+    longDescription:
+      "AI-powered analysis of your salary breakdown. Flags HRA under-utilisation, suggests LTA, NPS 80CCD(2) and standard-deduction levers, and returns a target restructure with estimated monthly savings.",
+    category: "citizens-employees",
+    icp: "EMPLOYEE",
+    premiumPdf: true,
+    premiumPrice: 49900, // ₹499
+  },
+  {
+    slug: "partnership-deed-generator",
+    name: "Partnership Deed Generator",
+    shortDescription:
+      "Indian Partnership Act 1932 deed for 2 to 5 partners in minutes",
+    longDescription:
+      "Generates a Partnership Deed with capital contribution, profit sharing, management, admission / retirement, dissolution and Section 40(b)-aligned remuneration. Guidance on Registrar of Firms (Form A) filing.",
+    category: "citizens-msme",
+    icp: "MSME_OWNER",
+    premiumPdf: true,
+    premiumPrice: 49900, // ₹499
+  },
+  {
+    slug: "will-drafter",
+    name: "Will Drafter (Simple)",
+    shortDescription:
+      "Simple Will under Indian Succession Act, 1925 — 2 witnesses required",
+    longDescription:
+      "Generates a Will compliant with Section 63 of the Indian Succession Act, 1925. Handles assets, beneficiaries, executor, residuary clause, no-contest. Flags special treatment under Muslim personal law.",
+    category: "citizens-senior-citizens",
+    icp: "SENIOR_CITIZEN",
+    premiumPdf: true,
+    premiumPrice: 99900, // ₹999
+  },
+  {
+    slug: "gift-deed-generator",
+    name: "Gift Deed Generator",
+    shortDescription:
+      "Gift Deed under Section 122, TPA — stamp duty & registration note",
+    longDescription:
+      "Generates a Gift Deed with relationship-based stamp duty estimate (concessional for family), acceptance clause, Section 56(2)(x) tax note, and registration requirement flag for immovable property.",
+    category: "citizens-nri",
+    icp: "NRI",
+    premiumPdf: true,
+    premiumPrice: 59900, // ₹599
+  },
+  {
+    slug: "power-of-attorney-generator",
+    name: "Power of Attorney Generator",
+    shortDescription:
+      "General / Specific / Durable POA — NRI consular note included",
+    longDescription:
+      "Generates a POA under the Powers-of-Attorney Act, 1882 with Indian Stamp Act notes, notarisation guidance, NRI consular-attestation requirement, and Suraj Lamp 2011 registration requirement for property-related POAs.",
+    category: "citizens-nri",
+    icp: "NRI",
+    premiumPdf: true,
+    premiumPrice: 99900, // ₹999
+  },
+  {
+    slug: "rental-receipt-generator",
+    name: "Rental Receipt Generator",
+    shortDescription:
+      "HRA-compliant rent receipt with PAN + Section 194-IB TDS note",
+    longDescription:
+      "Generates a rent receipt ready for HRA proof under Section 10(13A) and Rule 2A. Flags landlord PAN requirement if rent ≥ ₹8,333/mo and Section 194-IB TDS requirement if rent ≥ ₹50,000/mo.",
+    category: "citizens-tenants",
+    icp: "TENANT_LANDLORD",
+    premiumPdf: true,
+    premiumPrice: 9900, // ₹99
+  },
+  {
+    slug: "freelancer-contract-simple",
+    name: "Freelancer Contract Generator (Simple)",
+    shortDescription:
+      "Simple freelance services agreement with GST + TDS 194J notes",
+    longDescription:
+      "A simplified, India-ready freelance services agreement with GST reverse-charge notes, Section 194J TDS, IP assignment, confidentiality, and milestone-based payment schedule.",
+    category: "citizens-freelancers",
+    icp: "FREELANCER",
+    premiumPdf: true,
+    premiumPrice: 29900, // ₹299
   },
 ];
 

@@ -14,6 +14,11 @@ import {
   Handshake,
   BarChart3,
   Briefcase,
+  AlertTriangle,
+  Building2,
+  Receipt,
+  Scroll,
+  UserCheck,
 } from "lucide-react";
 import { ToolCard } from "@/components/tools/tool-card";
 
@@ -67,6 +72,96 @@ const CITIZEN_TOOLS = [
       "Draft a ready-to-file complaint under Consumer Protection Act 2019. Auto-picks the right forum.",
     icon: Gavel,
     icp: "Consumer",
+    badge: "Free",
+  },
+  {
+    href: "/tools/rti-application-drafter",
+    title: "RTI Application Drafter",
+    description:
+      "Draft a Right to Information application under the RTI Act, 2005 — with fee note, PIO address & delivery mode.",
+    icon: Gavel,
+    icp: "Consumer",
+    badge: "Free",
+  },
+  {
+    href: "/tools/notice-period-rules-checker",
+    title: "Notice Period Rules Checker",
+    description:
+      "State-specific statutory notice + Section 27 non-compete + garden-leave analysis.",
+    icon: Clock,
+    icp: "Employee",
+    badge: "Free",
+  },
+  {
+    href: "/tools/gratuity-calculator",
+    title: "Gratuity Calculator",
+    description:
+      "Payment of Gratuity Act 1972 formula + Section 10(10) tax exemption (₹20L cap).",
+    icon: Calculator,
+    icp: "Employee",
+    badge: "Free",
+  },
+  {
+    href: "/tools/salary-structure-analyzer",
+    title: "Salary Structure Analyzer",
+    description:
+      "AI restructures your CTC for maximum in-hand — HRA, LTA, NPS 80CCD(2) levers.",
+    icon: FileSearch,
+    icp: "Employee",
+    badge: "AI-powered",
+  },
+  {
+    href: "/tools/partnership-deed-generator",
+    title: "Partnership Deed Generator",
+    description:
+      "Indian Partnership Act, 1932 deed for 2 to 5 partners — capital, profit share, management, dissolution.",
+    icon: Handshake,
+    icp: "MSME Owner",
+    badge: "Free",
+  },
+  {
+    href: "/tools/will-drafter",
+    title: "Will Drafter (Simple)",
+    description:
+      "Indian Succession Act, 1925 Will with 2 witnesses, executor, beneficiaries and residuary clause.",
+    icon: Scroll,
+    icp: "Senior Citizen",
+    badge: "Free",
+  },
+  {
+    href: "/tools/gift-deed-generator",
+    title: "Gift Deed Generator",
+    description:
+      "TPA Section 122 Gift Deed with stamp-duty estimate and registration note (relative vs non-relative).",
+    icon: FileSignature,
+    icp: "NRI / Family",
+    badge: "Free",
+  },
+  {
+    href: "/tools/power-of-attorney-generator",
+    title: "Power of Attorney Generator",
+    description:
+      "General, Specific or Durable POA — NRI consular attestation + Suraj Lamp registration note.",
+    icon: UserCheck,
+    icp: "NRI",
+    badge: "Free",
+  },
+  {
+    href: "/tools/rental-receipt-generator",
+    title: "Rental Receipt Generator",
+    description:
+      "HRA-compliant rent receipt with PAN & Section 194-IB TDS notes for your tax filing.",
+    icon: Receipt,
+    icp: "Tenant",
+    badge: "Free",
+  },
+  {
+    href: "/tools/freelancer-contract-simple",
+    title: "Freelancer Contract Generator",
+    description:
+      "Simple Indian freelance contract with GST, TDS 194J, IP assignment & milestone payments.",
+    icon: Briefcase,
+    icp: "Freelancer",
     badge: "Free",
   },
 ];
@@ -194,6 +289,63 @@ const STARTUP_FOUNDER_TOOLS = [
   },
 ];
 
+const RE_DEVELOPER_TOOLS = [
+  {
+    href: "/tools/rera-compliance-checker",
+    title: "RERA Compliance Checker",
+    description:
+      "Score your project against RERA 2016 — registration, disclosure, escrow, and quarterly-update obligations.",
+    icon: ShieldCheck,
+    icp: "Real Estate Developer",
+    badge: "Free",
+  },
+  {
+    href: "/tools/builder-buyer-agreement-analyzer",
+    title: "Builder-Buyer Agreement Analyzer",
+    description:
+      "Paste the agreement. Claude checks Sections 13, 14, 18 and 19, flags red flags, gives fixes.",
+    icon: FileSearch,
+    icp: "Real Estate Developer",
+    badge: "AI-powered",
+  },
+  {
+    href: "/tools/real-estate-stamp-duty-calculator",
+    title: "Real Estate Stamp Duty Calculator",
+    description:
+      "State-wise stamp duty + registration + local fees for Sale Deed, ATS, Allotment and Conveyance.",
+    icon: Calculator,
+    icp: "Real Estate Developer",
+    badge: "Free",
+  },
+  {
+    href: "/tools/rera-penalty-calculator",
+    title: "RERA Penalty Calculator",
+    description:
+      "Estimate exposure under Sections 59-66 with mitigation recommendations.",
+    icon: AlertTriangle,
+    icp: "Real Estate Developer",
+    badge: "Free",
+  },
+  {
+    href: "/tools/agreement-to-sell-generator",
+    title: "Agreement-to-Sell Generator",
+    description:
+      "TPA § 54 + RERA-aligned ATS with payment schedule, earnest money and possession commitments.",
+    icon: FileText,
+    icp: "Real Estate Developer",
+    badge: "Free",
+  },
+  {
+    href: "/tools/tripartite-agreement-generator",
+    title: "Tripartite Agreement Generator",
+    description:
+      "Builder-Buyer-Bank tripartite per RERA § 19 + Banking Regulation Act. Includes Builder NOC.",
+    icon: Building2,
+    icp: "Real Estate Developer",
+    badge: "Free",
+  },
+];
+
 export default function ToolsHubPage() {
   return (
     <div className="min-h-screen bg-slate-50">
@@ -278,6 +430,26 @@ export default function ToolsHubPage() {
           </p>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {STARTUP_FOUNDER_TOOLS.map((t) => (
+              <ToolCard key={t.href} {...t} />
+            ))}
+          </div>
+
+          <div className="mt-16 mb-2 flex items-baseline justify-between gap-4">
+            <h2 className="font-heading text-xl font-semibold text-slate-900 sm:text-2xl">
+              For Real Estate Developers
+            </h2>
+            <span className="text-xs tracking-wide text-slate-500 uppercase">
+              {RE_DEVELOPER_TOOLS.length} tools
+            </span>
+          </div>
+          <p className="mb-6 text-sm text-slate-600">
+            RERA-focused tools for promoters and developers — compliance,
+            penalty exposure, agreement drafting and closing-cost math. Aligned
+            to the Real Estate (Regulation and Development) Act, 2016 and state
+            RERA rules.
+          </p>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {RE_DEVELOPER_TOOLS.map((t) => (
               <ToolCard key={t.href} {...t} />
             ))}
           </div>

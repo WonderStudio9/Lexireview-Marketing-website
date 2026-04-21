@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/db";
 import { SITE_URL } from "@/lib/seo";
+import { allStateSlugs } from "@/lib/pseo/slugs";
 
 export const dynamic = "force-dynamic";
 
@@ -147,5 +148,95 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  return [...staticPages, ...blogPages];
+  // Programmatic SEO: state × topic (stamp-duty + rent-agreement × 36 states/UTs)
+  const PSEO_RELEASED = new Date("2026-04-22T00:00:00Z");
+  const pseoPages: MetadataRoute.Sitemap = allStateSlugs().flatMap(({ slug }) => [
+    {
+      url: `${SITE_URL}/stamp-duty/${slug}`,
+      lastModified: PSEO_RELEASED,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/rent-agreement/${slug}`,
+      lastModified: PSEO_RELEASED,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+  ]);
+
+  // Citizens sub-hubs (13 segments)
+  const CITIZEN_SEGMENTS = [
+    "tenants",
+    "home-buyers",
+    "employees",
+    "freelancers",
+    "msme-owners",
+    "content-creators",
+    "startup-founders",
+    "nri",
+    "consumers",
+    "senior-citizens",
+    "students",
+    "couples",
+    "farmers",
+  ];
+  const citizensPages: MetadataRoute.Sitemap = CITIZEN_SEGMENTS.map((seg) => ({
+    url: `${SITE_URL}/citizens/${seg}`,
+    lastModified: PSEO_RELEASED,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  // Hindi hub
+  const hindiPages: MetadataRoute.Sitemap = [
+    {
+      url: `${SITE_URL}/hindi`,
+      lastModified: PSEO_RELEASED,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+  ];
+
+  // Trust / security page
+  const trustPages: MetadataRoute.Sitemap = [
+    {
+      url: `${SITE_URL}/trust`,
+      lastModified: PSEO_RELEASED,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+  ];
+
+  // Lead magnets
+  const magnetPages: MetadataRoute.Sitemap = [
+    {
+      url: `${SITE_URL}/lead-magnets/solo-lawyer-playbook`,
+      lastModified: PSEO_RELEASED,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/lead-magnets/founder-legal-checklist`,
+      lastModified: PSEO_RELEASED,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/lead-magnets/rera-compliance-handbook`,
+      lastModified: PSEO_RELEASED,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+  ];
+
+  return [
+    ...staticPages,
+    ...blogPages,
+    ...pseoPages,
+    ...citizensPages,
+    ...magnetPages,
+    ...hindiPages,
+    ...trustPages,
+  ];
 }
